@@ -9,6 +9,8 @@ import '../cart/cart_screen.dart';
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
+  static const route = '/fvrtScreen';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,11 +90,10 @@ class FavoriteScreen extends StatelessWidget {
         child: ResuableButton(
           buttonText: 'Add all To My Cart',
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return const CartScreen();
-              },
-            ));
+            Navigator.pushNamed(
+              context,
+              CartScreen.route,
+            );
           },
         ),
       ),

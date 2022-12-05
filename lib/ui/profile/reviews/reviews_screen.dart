@@ -8,6 +8,8 @@ import '../../../utils/widgets/text_style.dart';
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key});
 
+  static const route = '/ReviewScreen';
+
   @override
   State<ReviewScreen> createState() => _ReviewScreenState();
 }

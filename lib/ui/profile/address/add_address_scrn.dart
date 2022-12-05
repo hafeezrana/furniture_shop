@@ -7,6 +7,8 @@ import '../../../utils/widgets/text_style.dart';
 class AddAdressScreen extends StatefulWidget {
   const AddAdressScreen({super.key});
 
+  static const route = '/addAddressScreen';
+
   @override
   State<AddAdressScreen> createState() => _AddAdressScreenState();
 }

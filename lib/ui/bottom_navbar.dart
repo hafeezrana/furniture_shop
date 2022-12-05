@@ -9,6 +9,8 @@ import '../utils/constants/colors_consts.dart';
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});
 
+  static const route = '/bottomNavScrn';
+
   @override
   State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
 }

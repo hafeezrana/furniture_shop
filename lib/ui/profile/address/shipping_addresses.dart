@@ -7,6 +7,8 @@ import '../../../utils/widgets/text_style.dart';
 class ShippingAddressScreen extends StatefulWidget {
   const ShippingAddressScreen({super.key});
 
+  static const route = '/shippingScreen';
+
   @override
   State<ShippingAddressScreen> createState() => _ShippingAddressScreenState();
 }
@@ -80,13 +82,9 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const AddAdressScreen();
-                },
-              ),
+              AddAdressScreen.route,
             );
           },
           child: const Icon(Icons.add)),

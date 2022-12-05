@@ -12,6 +12,8 @@ import 'package:furniture_shop/utils/widgets/text_style.dart';
 class MyProfilesScreen extends StatefulWidget {
   const MyProfilesScreen({super.key});
 
+  static const route = '/profileScreen';
+
   @override
   State<MyProfilesScreen> createState() => _MyProfilesScreenState();
 }
@@ -81,13 +83,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'My Orders',
                 text2: 'Already have 10 orders',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const OrderScreen();
-                      },
-                    ),
+                    OrderScreen.route,
                   );
                 },
               ),
@@ -95,13 +93,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'Shipping Adresses',
                 text2: '03 addresses',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const ShippingAddressScreen();
-                      },
-                    ),
+                    ShippingAddressScreen.route,
                   );
                 },
               ),
@@ -109,13 +103,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'Payment Methods',
                 text2: 'You have 2 cards',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const PaymentMethodscrn();
-                      },
-                    ),
+                    PaymentMethodscrn.route,
                   );
                 },
               ),
@@ -123,13 +113,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'My Reviews',
                 text2: 'Review for 3 items',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const ReviewScreen();
-                      },
-                    ),
+                    ReviewScreen.route,
                   );
                 },
               ),
@@ -137,13 +123,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'Setting',
                 text2: 'Notification, Password, FAQ, Contacts',
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return const SettingScreen();
-                      },
-                    ),
+                    SettingScreen.route,
                   );
                 },
               ),

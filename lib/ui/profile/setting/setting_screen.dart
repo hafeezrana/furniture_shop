@@ -6,6 +6,8 @@ import '../../../utils/widgets/text_style.dart';
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
 
+  static const route = '/settingScreen';
+
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }

@@ -7,9 +7,16 @@ import '../../utils/constants/colors_consts.dart';
 import '../../utils/constants/images_consts.dart';
 import '../../utils/widgets/text_style.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
+  static const route = '/cartScreen';
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -212,11 +219,9 @@ class CartScreen extends StatelessWidget {
         child: ResuableButton(
           buttonText: 'Check Out',
           onTap: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) {
-                return const CheckOutScreen();
-              }),
+              CheckOutScreen.route,
             );
           },
         ),

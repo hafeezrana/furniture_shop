@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/bottom_navbar.dart';
+import 'package:furniture_shop/ui/authentication/signin/view/signIn_screen.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusbale_textformf.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
+import '../../../bottom_navbar.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
-
+  static const route = '/signUp';
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -109,23 +111,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ResuableButton(
                         buttonText: 'SIGN UP',
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (_) {
-                                return const BottomNavBarScreen();
-                              },
-                            ),
+                            BottomNavBarScreen.route,
                           );
                         },
                       ),
+                      const SizedBox(height: 10),
                       TextButton(
                         child: Text(
                           'Already have an account? SIGN IN',
                           style: MyTextStyle.textStyle2
                               .copyWith(color: ConstColors.black),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            SignInScreen.route,
+                          );
+                        },
                       ),
                       const SizedBox(height: 10),
                     ],

@@ -8,6 +8,8 @@ import '../../../utils/widgets/text_style.dart';
 class AddPaymentMethodScrn extends StatefulWidget {
   const AddPaymentMethodScrn({super.key});
 
+  static const route = '/AddPayment';
+
   @override
   State<AddPaymentMethodScrn> createState() => _AddPaymentMethodScrnState();
 }

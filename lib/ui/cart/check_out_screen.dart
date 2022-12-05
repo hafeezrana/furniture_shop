@@ -4,9 +4,16 @@ import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
-class CheckOutScreen extends StatelessWidget {
+class CheckOutScreen extends StatefulWidget {
   const CheckOutScreen({super.key});
 
+  static const route = '/checkOut';
+
+  @override
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
+}
+
+class _CheckOutScreenState extends State<CheckOutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,13 +184,9 @@ class CheckOutScreen extends StatelessWidget {
         child: ResuableButton(
           buttonText: 'SUBMIT ORDER',
           onTap: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const OrderNoteScreen();
-                },
-              ),
+              OrderNoteScreen.route,
             );
           },
         ),

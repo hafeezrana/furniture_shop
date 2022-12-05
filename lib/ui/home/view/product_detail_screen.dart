@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/ui/cart/cart_screen.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
@@ -7,6 +8,8 @@ import '../../../utils/constants/colors_consts.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
+
+  static const route = '/productScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +111,7 @@ class ProductDetailScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'Minimal Stand',
+                  'Wooden Chair',
                   style: MyTextStyle.textStyle3,
                 ),
               ),
@@ -117,7 +120,7 @@ class ProductDetailScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('\$ 50', style: MyTextStyle.textStyle4),
+                    const Text('\$ 30', style: MyTextStyle.textStyle4),
                     Row(
                       children: [
                         Container(
@@ -177,7 +180,7 @@ class ProductDetailScreen extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                    'Minimal Stand is made up of natural wood. Design is so simle and good.Now a days it is most common used in family.With three different colors where you select with your best choice for home.',
+                    'Wooden Chair is made up of natural wood. Design is so simle and good.Now a days it is most common used in family.With three different colors where you select with your best choice for home.',
                     maxLines: 10,
                     style: MyTextStyle.textStyle1),
               ),
@@ -201,7 +204,12 @@ class ProductDetailScreen extends StatelessWidget {
                   const SizedBox(width: 10),
                   ResuableButton(
                     buttonText: 'Add To Cart',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        CartScreen.route,
+                      );
+                    },
                   )
                 ],
               ),

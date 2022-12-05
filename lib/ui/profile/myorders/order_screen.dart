@@ -7,6 +7,8 @@ import '../../../utils/widgets/text_style.dart';
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
 
+  static const route = '/OrderScreen';
+
   @override
   Widget build(BuildContext context) {
     final tabs = [

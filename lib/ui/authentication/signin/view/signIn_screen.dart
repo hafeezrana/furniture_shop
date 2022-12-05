@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/ui/authentication/signup/view/signUp_screen.dart';
+import 'package:furniture_shop/ui/bottom_navbar.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusbale_textformf.dart';
@@ -7,6 +8,8 @@ import 'package:furniture_shop/utils/widgets/text_style.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
+
+  static const route = '/signin';
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -111,23 +114,25 @@ class _SignInScreenState extends State<SignInScreen> {
                       ResuableButton(
                         buttonText: 'Log In',
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (_) {
-                                return const SignUpScreen();
-                              },
-                            ),
+                            BottomNavBarScreen.route,
                           );
                         },
                       ),
+                      const SizedBox(height: 10),
                       TextButton(
                         child: Text(
                           'SIGN UP',
                           style: MyTextStyle.textStyle2
                               .copyWith(color: ConstColors.black),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            SignUpScreen.route,
+                          );
+                        },
                       ),
                       const SizedBox(height: 10),
                     ],

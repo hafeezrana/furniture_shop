@@ -8,6 +8,8 @@ import '../../../utils/widgets/home_widgets.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  static const route = '/home';
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -88,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 8 / 14,
+                    // childAspectRatio: 8 / 14,
+                    childAspectRatio: 7 / 13,
                   ),
                   itemCount: 1,
                   itemBuilder: (context, index) {
@@ -97,13 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           horizontal: 10, vertical: 6),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const ProductDetailScreen();
-                              },
-                            ),
+                            ProductDetailScreen.route,
                           );
                         },
                         child: ReusableProduct(

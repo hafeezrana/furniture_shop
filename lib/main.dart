@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/routes.dart';
 import 'package:furniture_shop/ui/authentication/signin/view/signIn_screen.dart';
 
 void main() {
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const SignInScreen(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      // initialRoute: SignInScreen.route,
     );
   }
 }

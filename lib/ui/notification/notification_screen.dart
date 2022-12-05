@@ -7,6 +7,8 @@ import '../../utils/widgets/text_style.dart';
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
+  static const route = '/notificationScreen';
+
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
 }

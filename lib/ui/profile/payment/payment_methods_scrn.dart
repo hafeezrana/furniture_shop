@@ -6,6 +6,8 @@ import 'package:furniture_shop/utils/widgets/text_style.dart';
 class PaymentMethodscrn extends StatefulWidget {
   const PaymentMethodscrn({super.key});
 
+  static const route = '/PayementMethodScreen';
+
   @override
   State<PaymentMethodscrn> createState() => _PaymentMethodscrnState();
 }
@@ -82,13 +84,9 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const AddPaymentMethodScrn();
-                },
-              ),
+              AddPaymentMethodScrn.route,
             );
           },
           child: const Icon(Icons.add)),
