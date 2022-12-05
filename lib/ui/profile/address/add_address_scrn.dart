@@ -15,30 +15,32 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                const Text('Add Shipping Address',
-                    style: MyTextStyle.textStyle3b),
-                const SizedBox(width: 10)
-              ],
-            ),
-            const SizedBox(height: 10),
-            AddressContainer('Full Name', 'Rizwan Javed'),
-            AddressContainer('Address', 'Ex: 25 Brownie street'),
-            AddressContainer('Zip Code (Postal Code)', '0203 38283'),
-            AddressContainer('Country', 'Pakistan'),
-            AddressContainer('City', 'Lahore'),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
+                  const Text('Add Shipping Address',
+                      style: MyTextStyle.textStyle3b),
+                  const SizedBox(width: 10)
+                ],
+              ),
+              const SizedBox(height: 10),
+              AddressContainer('Full Name', 'Rizwan Javed'),
+              AddressContainer('Address', 'Ex: 25 Brownie street'),
+              AddressContainer('Zip Code (Postal Code)', '0203 38283'),
+              AddressContainer('Country', 'Pakistan'),
+              AddressContainer('City', 'Lahore'),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Align(

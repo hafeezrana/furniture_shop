@@ -66,7 +66,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 1.6,
                 child: Card(
                   elevation: 16,
                   color: ConstColors.white,
@@ -106,6 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 10),
                       ResuableButton(
                         buttonText: 'SIGN UP',
                         onTap: () {
@@ -126,7 +126,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .copyWith(color: ConstColors.black),
                         ),
                         onPressed: () {},
-                      )
+                      ),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),

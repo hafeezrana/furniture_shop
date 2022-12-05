@@ -20,11 +20,11 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            scrollDirection: Axis.vertical,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,9 +36,7 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                       color: ConstColors.black2,
                     ),
                   ),
-                  Text('Profile',
-                      style: MyTextStyle.textStyle3b
-                          .copyWith(color: Colors.black)),
+                  const Text('Profile', style: MyTextStyle.textStyle3b),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(

@@ -23,17 +23,22 @@ class OrderScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
+                Icons.arrow_back_ios,
                 color: ConstColors.black,
               ),
             ),
             backgroundColor: Colors.white,
-            title: Text(
-              'My Orders', //
-              style: MyTextStyle.textStyle3b.copyWith(
-                color: ConstColors.black,
+            title: Align(
+              alignment: Alignment.center,
+              child: Text(
+                'My Orders', //
+
+                style: MyTextStyle.textStyle3b.copyWith(
+                  color: ConstColors.black,
+                ),
               ),
             ),
+            actions: [Container()],
             elevation: 0,
             bottom: TabBar(
               indicatorColor: ConstColors.black,
@@ -67,68 +72,71 @@ class OrderScreen extends StatelessWidget {
                 ),
               ],
             )),
-        body: Center(
-          child: TabBarView(
-            children: tabs
-                .map(
-                  (e) => Center(
-                      child: SizedBox(
-                    height: 140,
-                    child: ReusableCard(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                'Order No238427',
-                                style: MyTextStyle.textStyle2b,
-                              ),
-                              Text(
-                                '03/12/2022',
-                                style: MyTextStyle.textStyle2,
-                              ),
-                            ],
-                          ),
-                          const Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                'Quantity: 02',
-                                style: MyTextStyle.textStyle2,
-                              ),
-                              Text(
-                                'Total amout: \$ 200',
-                                style: MyTextStyle.textStyle2,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Detail',
-                                  style: MyTextStyle.textStyle2b
-                                      .copyWith(color: ConstColors.black),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Center(
+            child: TabBarView(
+              children: tabs
+                  .map(
+                    (e) => Center(
+                        child: SizedBox(
+                      height: 140,
+                      child: ReusableCard(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Order No238427',
+                                  style: MyTextStyle.textStyle2b,
                                 ),
-                              ),
-                              Text(
-                                e,
-                                style: MyTextStyle.textStyle2b
-                                    .copyWith(color: Colors.green),
-                              ),
-                            ],
-                          ),
-                        ],
+                                Text(
+                                  '03/12/2022',
+                                  style: MyTextStyle.textStyle2,
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'Quantity: 02',
+                                  style: MyTextStyle.textStyle2,
+                                ),
+                                Text(
+                                  'Total amout: \$ 200',
+                                  style: MyTextStyle.textStyle2,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Detail',
+                                    style: MyTextStyle.textStyle2b
+                                        .copyWith(color: ConstColors.black),
+                                  ),
+                                ),
+                                Text(
+                                  e,
+                                  style: MyTextStyle.textStyle2b
+                                      .copyWith(color: Colors.green),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  )),
-                )
-                .toList(),
+                    )),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),

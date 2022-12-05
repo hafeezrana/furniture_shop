@@ -16,50 +16,52 @@ class _AddPaymentMethodScrnState extends State<AddPaymentMethodScrn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-                const Text('Add Payment Method',
-                    style: MyTextStyle.textStyle3b),
-                const SizedBox(width: 10)
-              ],
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 160,
-              width: 400,
-              child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
-            ),
-            PaymentContainer('Full Name', 'Ex: Rizwan Javed'),
-            PaymentContainer('Card Number', '**** **** **** 1242'),
-            SizedBox(
-              height: 160,
-              child: Row(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView(
+            children: [
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: PaymentContainer('Cvv', 'Ex: 123'),
-                  ),
-                  SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: PaymentContainer('Expiration Date', '22/12/2022'),
-                  ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
+                  const Text('Add Payment Method',
+                      style: MyTextStyle.textStyle3b),
+                  const SizedBox(width: 10)
                 ],
               ),
-            )
-          ],
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 160,
+                width: 400,
+                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
+              ),
+              PaymentContainer('Full Name', 'Ex: Rizwan Javed'),
+              PaymentContainer('Card Number', '**** **** **** 1242'),
+              SizedBox(
+                height: 160,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: PaymentContainer('Cvv', 'Ex: 123'),
+                    ),
+                    SizedBox(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: PaymentContainer('Expiration Date', '22/12/2022'),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
       floatingActionButton: Align(

@@ -57,8 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 7,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Hello !',
@@ -73,60 +73,65 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 1.9,
+              // height: MediaQuery.of(context).size.height / 2,
               child: Card(
                 elevation: 16,
                 color: ConstColors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
-                            Text('Email', style: MyTextStyle.textStyle2),
-                            ReUsableTextFField(
-                              labelText: '',
-                            ),
-                            SizedBox(height: 18),
-                            Text('Password', style: MyTextStyle.textStyle2),
-                            ReUsableTextFField(
+                child: SingleChildScrollView(
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: const [
+                              Text('Email', style: MyTextStyle.textStyle2),
+                              ReUsableTextFField(
                                 labelText: '',
-                                icon: Icon(Icons.remove_red_eye_outlined)),
-                          ],
+                              ),
+                              SizedBox(height: 18),
+                              Text('Password', style: MyTextStyle.textStyle2),
+                              ReUsableTextFField(
+                                  labelText: '',
+                                  icon: Icon(Icons.remove_red_eye_outlined)),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      'Forgot Password',
-                      style: MyTextStyle.textStyle2
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    ResuableButton(
-                      buttonText: 'Log In',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) {
-                              return const SignUpScreen();
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                    TextButton(
-                      child: Text(
-                        'SIGN UP',
+                      const SizedBox(height: 10),
+                      Text(
+                        'Forgot Password',
                         style: MyTextStyle.textStyle2
-                            .copyWith(color: ConstColors.black),
+                            .copyWith(fontWeight: FontWeight.w600),
                       ),
-                      onPressed: () {},
-                    )
-                  ],
+                      const SizedBox(height: 10),
+                      ResuableButton(
+                        buttonText: 'Log In',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) {
+                                return const SignUpScreen();
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          'SIGN UP',
+                          style: MyTextStyle.textStyle2
+                              .copyWith(color: ConstColors.black),
+                        ),
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
                 ),
               ),
             ),
