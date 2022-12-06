@@ -20,60 +20,47 @@ class OrderScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-            leading: IconButton(
+          leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: ConstColors.black,
+              icon: const Icon(Icons.arrow_back_ios, color: ConstColors.black)),
+          backgroundColor: Colors.white,
+          title: Align(
+            alignment: Alignment.center,
+            child: Text('My Orders',
+                style:
+                    MyTextStyle.textStyle3b.copyWith(color: ConstColors.black)),
+          ),
+          actions: [Container()],
+          elevation: 0,
+          bottom: TabBar(
+            indicatorColor: ConstColors.black,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorWeight: 4,
+            indicatorPadding: const EdgeInsets.all(10),
+            tabs: [
+              SizedBox(
+                height: 40,
+                child: Text('Delivered',
+                    style: MyTextStyle.textStyle2
+                        .copyWith(color: ConstColors.black)),
               ),
-            ),
-            backgroundColor: Colors.white,
-            title: Align(
-              alignment: Alignment.center,
-              child: Text(
-                'My Orders', //
-
-                style: MyTextStyle.textStyle3b.copyWith(
-                  color: ConstColors.black,
-                ),
+              SizedBox(
+                height: 40,
+                child: Text('Processing',
+                    style: MyTextStyle.textStyle2
+                        .copyWith(color: ConstColors.black)),
               ),
-            ),
-            actions: [Container()],
-            elevation: 0,
-            bottom: TabBar(
-              indicatorColor: ConstColors.black,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorWeight: 4,
-              indicatorPadding: const EdgeInsets.all(10),
-              tabs: [
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    'Delivered',
+              SizedBox(
+                height: 40,
+                child: Text('Canceled',
                     style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    'Processing',
-                    style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    'Canceled',
-                    style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black),
-                  ),
-                ),
-              ],
-            )),
+                        .copyWith(color: ConstColors.black)),
+              ),
+            ],
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Center(
@@ -89,28 +76,20 @@ class OrderScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
-                                Text(
-                                  'Order No238427',
-                                  style: MyTextStyle.textStyle2b,
-                                ),
-                                Text(
-                                  '03/12/2022',
-                                  style: MyTextStyle.textStyle2,
-                                ),
+                                Text('Order No238427',
+                                    style: MyTextStyle.textStyle2b),
+                                Text('03/12/2022',
+                                    style: MyTextStyle.textStyle2),
                               ],
                             ),
                             const Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
-                                Text(
-                                  'Quantity: 02',
-                                  style: MyTextStyle.textStyle2,
-                                ),
-                                Text(
-                                  'Total amout: \$ 200',
-                                  style: MyTextStyle.textStyle2,
-                                ),
+                                Text('Quantity: 02',
+                                    style: MyTextStyle.textStyle2),
+                                Text('Total amout: \$ 200',
+                                    style: MyTextStyle.textStyle2)
                               ],
                             ),
                             const SizedBox(height: 10),
@@ -119,17 +98,13 @@ class OrderScreen extends StatelessWidget {
                               children: [
                                 TextButton(
                                   onPressed: () {},
-                                  child: Text(
-                                    'Detail',
+                                  child: Text('Detail',
+                                      style: MyTextStyle.textStyle2b
+                                          .copyWith(color: ConstColors.black)),
+                                ),
+                                Text(e,
                                     style: MyTextStyle.textStyle2b
-                                        .copyWith(color: ConstColors.black),
-                                  ),
-                                ),
-                                Text(
-                                  e,
-                                  style: MyTextStyle.textStyle2b
-                                      .copyWith(color: Colors.green),
-                                ),
+                                        .copyWith(color: Colors.green)),
                               ],
                             ),
                           ],
@@ -165,12 +140,11 @@ class OrderScreen extends StatelessWidget {
             textAlign: TextAlign.start,
             maxLines: 2,
             decoration: InputDecoration(
-              hintText: 'Your Address is here',
-              hintStyle:
-                  MyTextStyle.textStyle1.copyWith(fontWeight: FontWeight.w600),
-              border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-            ),
+                hintText: 'Your Address is here',
+                hintStyle: MyTextStyle.textStyle1
+                    .copyWith(fontWeight: FontWeight.w600),
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none),
           ),
         ],
       ),
@@ -183,20 +157,14 @@ class OrderScreen extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          // color: ConstColors.green,
         ),
         height: 35,
         width: double.maxFinite / 3,
         child: Center(
           child: Text(
             text,
-            // style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-
             style: const TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-            ),
+                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ),
       ),

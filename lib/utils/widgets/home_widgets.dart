@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 
+import '../../cart/cart_screen.dart';
 import '../constants/colors_consts.dart';
 import 'text_style.dart';
 
@@ -19,21 +21,14 @@ class ReusableProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: 400,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            // height: MediaQuery.of(context).size.height / 6,
-            // height: 160,
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
                 Container(
-                  // height: MediaQuery.of(context).size.height / 5,
-
-                  // width: MediaQuery.of(context).size.width / 3.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
                     color: ConstColors.white2,
@@ -41,10 +36,9 @@ class ReusableProduct extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Hero(
-                      tag: 'hero',
-                      child: Image.network(ConstsImages.randomImage,
-                          fit: BoxFit.cover),
-                    ),
+                        tag: 'hero',
+                        child: Image.network(ConstsImages.randomImage,
+                            fit: BoxFit.cover)),
                   ),
                 ),
                 Padding(
@@ -53,14 +47,14 @@ class ReusableProduct extends StatelessWidget {
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: ConstColors.white,
-                    ),
-                    child: const Icon(
-                      Icons.shopping_bag,
-                      color: ConstColors.black2,
-                      size: 34,
-                    ),
+                        borderRadius: BorderRadius.circular(8),
+                        color: ConstColors.white),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, CartScreen.route);
+                        },
+                        icon: const Icon(Icons.shopping_bag,
+                            color: ConstColors.black2, size: 34)),
                   ),
                 ),
               ],
@@ -68,15 +62,9 @@ class ReusableProduct extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              productName!,
-              style: MyTextStyle.textStyle2,
-            ),
+            child: Text(productName!, style: MyTextStyle.textStyle2),
           ),
-          Text(
-            price!,
-            style: MyTextStyle.textStyle2b,
-          ),
+          Text(price!, style: MyTextStyle.textStyle2b),
         ],
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/profile/payment/add_payment_screen.dart';
+
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+
+import 'add_payment_screen.dart';
 
 class PaymentMethodscrn extends StatefulWidget {
   const PaymentMethodscrn({super.key});
@@ -37,10 +39,9 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                height: 160,
-                width: 400,
-                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
-              ),
+                  height: 160,
+                  width: 400,
+                  child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill)),
               SizedBox(
                 height: 60,
                 child: Row(
@@ -58,10 +59,9 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
                 ),
               ),
               SizedBox(
-                height: 160,
-                width: 380,
-                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
-              ),
+                  height: 160,
+                  width: 380,
+                  child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill)),
               SizedBox(
                 height: 60,
                 child: Row(
@@ -84,10 +84,7 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              AddPaymentMethodScrn.route,
-            );
+            Navigator.pushNamed(context, AddPaymentMethodScrn.route);
           },
           child: const Icon(Icons.add)),
     );

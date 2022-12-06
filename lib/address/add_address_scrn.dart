@@ -63,9 +63,7 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          color: ConstColors.white2,
-        ),
+            borderRadius: BorderRadius.circular(6), color: ConstColors.white2),
         height: 80,
         child: Padding(
           padding: const EdgeInsets.all(6.0),
@@ -77,11 +75,10 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
                 textAlign: TextAlign.start,
                 style: MyTextStyle.textStyle2b,
                 decoration: InputDecoration(
-                  hintText: subtitle,
-                  hintStyle: MyTextStyle.textStyle1b,
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
+                    hintText: subtitle,
+                    hintStyle: MyTextStyle.textStyle1b,
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none),
               ),
             ],
           ),

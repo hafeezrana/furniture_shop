@@ -27,14 +27,8 @@ class ReUsableTextFField extends StatelessWidget {
         suffixIcon: icon,
         hintText: hintText,
         labelText: labelText,
-        labelStyle: const TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 18,
-        ),
-        hintStyle: const TextStyle(
-          fontWeight: FontWeight.w200,
-          fontSize: 16,
-        ),
+        labelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+        hintStyle: const TextStyle(fontWeight: FontWeight.w200, fontSize: 16),
       ),
     );
   }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/cart/check_out_screen.dart';
+
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 
 import '../../utils/constants/colors_consts.dart';
 import '../../utils/constants/images_consts.dart';
 import '../../utils/widgets/text_style.dart';
+import 'check_out_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -30,11 +31,10 @@ class _CartScreenState extends State<CartScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios),
-                  ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
                   const Text('My Cart', style: MyTextStyle.textStyle3b),
                   const SizedBox(width: 10)
                 ],
@@ -69,23 +69,17 @@ class _CartScreenState extends State<CartScreen> {
                                 height: 30,
                                 width: 30,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ConstColors.white2,
-                                ),
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: ConstColors.white2),
                                 child: InkWell(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.remove,
-                                    color: ConstColors.black3,
-                                    size: 22,
-                                  ),
-                                ),
+                                    onTap: () {},
+                                    child: const Icon(Icons.remove,
+                                        color: ConstColors.black3, size: 22)),
                               ),
                               const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                child:
-                                    Text('04', style: MyTextStyle.textStyle2),
-                              ),
+                                  padding: EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text('04',
+                                      style: MyTextStyle.textStyle2)),
                               Container(
                                 height: 30,
                                 width: 30,
@@ -94,13 +88,9 @@ class _CartScreenState extends State<CartScreen> {
                                   color: ConstColors.white2,
                                 ),
                                 child: InkWell(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: ConstColors.black3,
-                                    size: 22,
-                                  ),
-                                ),
+                                    onTap: () {},
+                                    child: const Icon(Icons.add,
+                                        color: ConstColors.black3, size: 22)),
                               ),
                             ],
                           ),
@@ -122,14 +112,10 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                //   );
-                // }
               ),
               Column(
                 children: [
                   SizedBox(
-                    // color: ConstColors.white,
-                    // width: MediaQuery.of(context).size.width ,
                     height: 50,
                     child: ReusableCard(
                       child: Row(
@@ -137,34 +123,24 @@ class _CartScreenState extends State<CartScreen> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1.4,
                             child: const TextField(
-                              textAlign: TextAlign.start,
-                              decoration: InputDecoration(
-                                hintText: 'Enter Your promo code',
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                              ),
-                            ),
+                                textAlign: TextAlign.start,
+                                decoration: InputDecoration(
+                                    hintText: 'Enter Your promo code',
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none)),
                           ),
                           const SizedBox(width: 4),
                           SizedBox(
                             height: 50,
                             width: MediaQuery.of(context).size.width / 6.6,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(color: ConstColors.black2),
-                            //   borderRadius: BorderRadius.circular(8),
-                            //   // color: ConstColors.black3,
-                            // ),
                             child: Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: ConstColors.black2),
-                                borderRadius: BorderRadius.circular(8),
-                                color: ConstColors.black3,
-                              ),
+                                  border: Border.all(color: ConstColors.black2),
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: ConstColors.black3),
                               width: 20,
                               child: InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
+                                onTap: () {},
                                 child: const Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: ConstColors.white,
@@ -180,32 +156,18 @@ class _CartScreenState extends State<CartScreen> {
                   const SizedBox(height: 6),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 1,
-
                     height: 50,
                     child: ReusableCard(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Total:', style: MyTextStyle.textStyle2),
-                          Text(
-                            '\$67',
-                            style: MyTextStyle.textStyle3
-                                .copyWith(fontWeight: FontWeight.w600),
-                          ),
+                          Text('\$67',
+                              style: MyTextStyle.textStyle3
+                                  .copyWith(fontWeight: FontWeight.w600)),
                         ],
                       ),
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     const Text('Total:', style: MyTextStyle.textStyle3),
-                    //     Text(
-                    //       '\$67',
-                    //       style: MyTextStyle.textStyle3
-                    //           .copyWith(fontWeight: FontWeight.w600),
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                   const SizedBox(height: 4),
                 ],
@@ -219,10 +181,7 @@ class _CartScreenState extends State<CartScreen> {
         child: ResuableButton(
           buttonText: 'Check Out',
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              CheckOutScreen.route,
-            );
+            Navigator.pushNamed(context, CheckOutScreen.route);
           },
         ),
       ),

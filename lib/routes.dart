@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/authentication/signin/view/signIn_screen.dart';
-import 'package:furniture_shop/ui/authentication/signup/view/signUp_screen.dart';
-import 'package:furniture_shop/ui/bottom_navbar.dart';
-import 'package:furniture_shop/ui/cart/cart_screen.dart';
-import 'package:furniture_shop/ui/cart/check_out_screen.dart';
-import 'package:furniture_shop/ui/cart/order_note_screen.dart';
-import 'package:furniture_shop/ui/favorites/favorites_screen.dart';
-import 'package:furniture_shop/ui/home/view/home_screen.dart';
-import 'package:furniture_shop/ui/home/view/product_detail_screen.dart';
-import 'package:furniture_shop/ui/notification/notification_screen.dart';
-import 'package:furniture_shop/ui/profile/address/add_address_scrn.dart';
-import 'package:furniture_shop/ui/profile/address/shipping_addresses.dart';
-import 'package:furniture_shop/ui/profile/my_profile_screen.dart';
-import 'package:furniture_shop/ui/profile/myorders/order_screen.dart';
-import 'package:furniture_shop/ui/profile/payment/add_payment_screen.dart';
-import 'package:furniture_shop/ui/profile/payment/payment_methods_scrn.dart';
-import 'package:furniture_shop/ui/profile/reviews/reviews_screen.dart';
-import 'package:furniture_shop/ui/profile/setting/setting_screen.dart';
+import 'package:furniture_shop/payment/payment_methods_scrn.dart';
+import 'package:furniture_shop/profile/my_profile_screen.dart';
+
+import 'address/add_address_scrn.dart';
+import 'address/shipping_addresses.dart';
+import 'authentication/signin/signIn_screen.dart';
+import 'authentication/signup/signUp_screen.dart';
+import 'bottom_navbar.dart';
+import 'cart/cart_screen.dart';
+import 'cart/check_out_screen.dart';
+import 'cart/order_note_screen.dart';
+import 'favorites/favorites_screen.dart';
+import 'home/home_screen.dart';
+import 'home/product_detail_screen.dart';
+import 'myorders/order_screen.dart';
+import 'notification/notification_screen.dart';
+import 'payment/add_payment_screen.dart';
+import 'reviews/reviews_screen.dart';
+import 'setting/setting_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

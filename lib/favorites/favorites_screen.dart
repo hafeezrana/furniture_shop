@@ -69,9 +69,14 @@ class FavoriteScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Icon(Icons.cancel_outlined),
-                            Icon(Icons.shopping_bag_outlined),
+                          children: [
+                            const Icon(Icons.cancel_outlined),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, CartScreen.route);
+                                },
+                                child: const Icon(Icons.shopping_bag_outlined)),
                           ],
                         ),
                       ),
@@ -90,10 +95,7 @@ class FavoriteScreen extends StatelessWidget {
         child: ResuableButton(
           buttonText: 'Add all To My Cart',
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              CartScreen.route,
-            );
+            Navigator.pushNamed(context, CartScreen.route);
           },
         ),
       ),

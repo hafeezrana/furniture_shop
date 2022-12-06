@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/cart/order_note_screen.dart';
+
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+
+import 'order_note_screen.dart';
 
 class CheckOutScreen extends StatefulWidget {
   const CheckOutScreen({super.key});
@@ -26,11 +28,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios),
-                  ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
                   const Text('Check out', style: MyTextStyle.textStyle3b),
                   const SizedBox(width: 10)
                 ],
@@ -44,9 +45,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     const Text('Shipping Address',
                         style: MyTextStyle.textStyle1),
                     IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.mode_edit_outlined),
-                    ),
+                        onPressed: () {},
+                        icon: const Icon(Icons.mode_edit_outlined)),
                   ],
                 ),
               ),
@@ -57,22 +57,20 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       textAlign: TextAlign.start,
                       style: MyTextStyle.textStyle2b,
                       decoration: InputDecoration(
-                        hintText: 'Name',
-                        hintStyle: MyTextStyle.textStyle2b,
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
+                          hintText: 'Name',
+                          hintStyle: MyTextStyle.textStyle2b,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none),
                     ),
                     Divider(),
                     TextField(
                       textAlign: TextAlign.start,
                       maxLines: 2,
                       decoration: InputDecoration(
-                        hintText: 'your address here',
-                        hintStyle: MyTextStyle.textStyle1,
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
+                          hintText: 'your address here',
+                          hintStyle: MyTextStyle.textStyle1,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none),
                     ),
                   ],
                 ),
@@ -84,23 +82,20 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   children: [
                     const Text('Payment', style: MyTextStyle.textStyle1),
                     IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.mode_edit_outlined),
-                    ),
+                        onPressed: () {},
+                        icon: const Icon(Icons.mode_edit_outlined)),
                   ],
                 ),
               ),
               ReusableCard(
                 child: const TextField(
-                  textAlign: TextAlign.start,
-                  style: MyTextStyle.textStyle2,
-                  decoration: InputDecoration(
-                    hintText: 'Code no 4637--',
-                    hintStyle: MyTextStyle.textStyle2b,
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                  ),
-                ),
+                    textAlign: TextAlign.start,
+                    style: MyTextStyle.textStyle2,
+                    decoration: InputDecoration(
+                        hintText: 'Code no 4637--',
+                        hintStyle: MyTextStyle.textStyle2b,
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none)),
               ),
               SizedBox(
                 height: 60,
@@ -110,23 +105,20 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     const Text('Delivery Method',
                         style: MyTextStyle.textStyle1),
                     IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.mode_edit_outlined),
-                    ),
+                        onPressed: () {},
+                        icon: const Icon(Icons.mode_edit_outlined)),
                   ],
                 ),
               ),
               ReusableCard(
                 child: const TextField(
-                  textAlign: TextAlign.start,
-                  style: MyTextStyle.textStyle2b,
-                  decoration: InputDecoration(
-                    hintText: 'DHL Fast(2-3) days',
-                    hintStyle: MyTextStyle.textStyle2b,
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                  ),
-                ),
+                    textAlign: TextAlign.start,
+                    style: MyTextStyle.textStyle2b,
+                    decoration: InputDecoration(
+                        hintText: 'DHL Fast(2-3) days',
+                        hintStyle: MyTextStyle.textStyle2b,
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none)),
               ),
               const SizedBox(height: 40),
               ReusableCard(
@@ -138,12 +130,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: const [
                         Text('Order:', style: MyTextStyle.textStyle2),
                         Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '\$94',
-                            style: MyTextStyle.textStyle2b,
-                          ),
-                        ),
+                            padding: EdgeInsets.only(right: 10),
+                            child:
+                                Text('\$94', style: MyTextStyle.textStyle2b)),
                       ],
                     ),
                     Row(
@@ -151,12 +140,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: const [
                         Text('Deliver:', style: MyTextStyle.textStyle2),
                         Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '\$06',
-                            style: MyTextStyle.textStyle2b,
-                          ),
-                        ),
+                            padding: EdgeInsets.only(right: 10),
+                            child:
+                                Text('\$06', style: MyTextStyle.textStyle2b)),
                       ],
                     ),
                     Row(
@@ -164,12 +150,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       children: const [
                         Text('Total:', style: MyTextStyle.textStyle2),
                         Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Text(
-                            '\$100',
-                            style: MyTextStyle.textStyle2b,
-                          ),
-                        ),
+                            padding: EdgeInsets.only(right: 10),
+                            child:
+                                Text('\$100', style: MyTextStyle.textStyle2b)),
                       ],
                     ),
                   ],
@@ -184,10 +167,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         child: ResuableButton(
           buttonText: 'SUBMIT ORDER',
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              OrderNoteScreen.route,
-            );
+            Navigator.pushNamed(context, OrderNoteScreen.route);
           },
         ),
       ),

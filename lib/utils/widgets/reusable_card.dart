@@ -12,10 +12,7 @@ class ReusableCard extends StatelessWidget {
     return Card(
       color: ConstColors.white,
       elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(8.0), child: child),
     );
   }
 }

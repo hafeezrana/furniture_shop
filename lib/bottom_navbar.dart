@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/favorites/favorites_screen.dart';
-import 'package:furniture_shop/ui/home/view/home_screen.dart';
-import 'package:furniture_shop/ui/notification/notification_screen.dart';
-import 'package:furniture_shop/ui/profile/my_profile_screen.dart';
-
 import '../utils/constants/colors_consts.dart';
+import 'favorites/favorites_screen.dart';
+import 'home/home_screen.dart';
+import 'notification/notification_screen.dart';
+import 'profile/my_profile_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});
@@ -42,25 +41,13 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-              ),
-              label: 'home'),
+              icon: Icon(Icons.home_outlined), label: 'home'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.bookmark_border_outlined,
-              ),
-              label: 'bookmark'),
+              icon: Icon(Icons.bookmark_border_outlined), label: 'favorite'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications_none,
-              ),
-              label: 'notification'),
+              icon: Icon(Icons.notifications_none), label: 'notification'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline,
-              ),
-              label: 'profile'),
+              icon: Icon(Icons.person_outline), label: 'profile'),
         ],
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/profile/address/add_address_scrn.dart';
 
 import '../../../utils/widgets/reusable_card.dart';
 import '../../../utils/widgets/text_style.dart';
+import 'add_address_scrn.dart';
 
 class ShippingAddressScreen extends StatefulWidget {
   const ShippingAddressScreen({super.key});
@@ -28,11 +28,10 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios),
-                  ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
                   const Text('Shipping Address',
                       style: MyTextStyle.textStyle3b),
                   const SizedBox(width: 10)
@@ -82,10 +81,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              AddAdressScreen.route,
-            );
+            Navigator.pushNamed(context, AddAdressScreen.route);
           },
           child: const Icon(Icons.add)),
     );

@@ -27,11 +27,10 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.arrow_back_ios),
-                ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
                 const Text('Setting', style: MyTextStyle.textStyle3b),
                 const SizedBox(width: 10)
               ],
@@ -45,9 +44,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   const Text('Personal Information',
                       style: MyTextStyle.textStyle1),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.mode_edit_outlined),
-                  ),
+                      onPressed: () {},
+                      icon: const Icon(Icons.mode_edit_outlined))
                 ],
               ),
             ),
@@ -57,15 +55,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: const [
                   Text('Name', style: MyTextStyle.textStyle1b),
                   TextField(
-                    textAlign: TextAlign.start,
-                    style: MyTextStyle.textStyle2b,
-                    decoration: InputDecoration(
-                      hintText: 'Hafeez Rana',
-                      hintStyle: MyTextStyle.textStyle2b,
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                    ),
-                  ),
+                      textAlign: TextAlign.start,
+                      style: MyTextStyle.textStyle2b,
+                      decoration: InputDecoration(
+                          hintText: 'Hafeez Rana',
+                          hintStyle: MyTextStyle.textStyle2b,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none)),
                 ],
               ),
             ),
@@ -75,15 +71,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: const [
                   Text('Email', style: MyTextStyle.textStyle1b),
                   TextField(
-                    textAlign: TextAlign.start,
-                    style: MyTextStyle.textStyle2b,
-                    decoration: InputDecoration(
-                      hintText: 'a@yahoo.com',
-                      hintStyle: MyTextStyle.textStyle2b,
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                    ),
-                  ),
+                      textAlign: TextAlign.start,
+                      style: MyTextStyle.textStyle2b,
+                      decoration: InputDecoration(
+                          hintText: 'a@yahoo.com',
+                          hintStyle: MyTextStyle.textStyle2b,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none)),
                 ],
               ),
             ),
@@ -94,9 +88,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: [
                   const Text('Password', style: MyTextStyle.textStyle1),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.mode_edit_outlined),
-                  ),
+                      onPressed: () {},
+                      icon: const Icon(Icons.mode_edit_outlined)),
                 ],
               ),
             ),
@@ -106,15 +99,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 children: const [
                   Text('Name', style: MyTextStyle.textStyle1b),
                   TextField(
-                    textAlign: TextAlign.start,
-                    style: MyTextStyle.textStyle2b,
-                    decoration: InputDecoration(
-                      hintText: '**********',
-                      hintStyle: MyTextStyle.textStyle2b,
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                    ),
-                  ),
+                      textAlign: TextAlign.start,
+                      style: MyTextStyle.textStyle2b,
+                      decoration: InputDecoration(
+                          hintText: '**********',
+                          hintStyle: MyTextStyle.textStyle2b,
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none)),
                 ],
               ),
             ),
@@ -131,10 +122,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Sales',
-                    style: MyTextStyle.textStyle2b,
-                  ),
+                  const Text('Sales', style: MyTextStyle.textStyle2b),
                   ToggleButtons(
                     onPressed: (index) {
                       setState(() {});
@@ -155,10 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'New Arrivals',
-                    style: MyTextStyle.textStyle2b,
-                  ),
+                  const Text('New Arrivals', style: MyTextStyle.textStyle2b),
                   ToggleButtons(
                     onPressed: (index) {
                       setState(() {});

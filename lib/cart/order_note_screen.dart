@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/ui/home/view/home_screen.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+
+import '../home/home_screen.dart';
+import '../myorders/order_screen.dart';
 
 class OrderNoteScreen extends StatefulWidget {
   const OrderNoteScreen({super.key});
@@ -27,25 +29,22 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Success!',
-                    style: MyTextStyle.textStyle4,
-                  ),
+                  const Text('Success!', style: MyTextStyle.textStyle4),
                   const SizedBox(height: 10),
                   SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Image.network(ConstsImages.randomImage),
-                  ),
+                      height: 200,
+                      width: 200,
+                      child: Image.network(ConstsImages.randomImage)),
                   const SizedBox(height: 10),
                   const Text(
-                    'Your order will be delivered soon.\n Thanks for choosing our app.',
-                    style: MyTextStyle.textStyle2,
-                  ),
+                      'Your order will be delivered soon.\n Thanks for choosing our app.',
+                      style: MyTextStyle.textStyle2),
                   const SizedBox(height: 10),
                   ResuableButton(
                     buttonText: 'Track Your Order',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, OrderScreen.route);
+                    },
                   ),
                   const SizedBox(height: 10),
                   Container(
@@ -58,8 +57,7 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 6),
                       onPressed: () {
                         // Navigator.push(
@@ -69,16 +67,11 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                         //     return const HomeScreen();
                         //   },
                         // ));
-                        Navigator.pushNamed(
-                          context,
-                          HomeScreen.route,
-                        );
+                        Navigator.pushNamed(context, HomeScreen.route);
                       },
-                      child: Text(
-                        'Back to Home',
-                        style: MyTextStyle.textStyle3
-                            .copyWith(color: ConstColors.black),
-                      ),
+                      child: Text('Back to Home',
+                          style: MyTextStyle.textStyle3
+                              .copyWith(color: ConstColors.black)),
                     ),
                   ),
                 ],

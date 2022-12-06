@@ -19,12 +19,10 @@ class ResuableButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.5,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: ConstColors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          elevation: 14,
-        ),
+            backgroundColor: ConstColors.black,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            elevation: 14),
         onPressed: onTap,
         child: Text(
           buttonText!,

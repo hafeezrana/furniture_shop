@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/routes.dart';
-import 'package:furniture_shop/ui/authentication/signin/view/signIn_screen.dart';
+
+import 'authentication/signin/signIn_screen.dart';
 
 void main() {
   runApp(const MyApp());
