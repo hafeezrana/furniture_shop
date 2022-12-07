@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "597603192637",
+    "project_id": "furniture-shopy",
+    "storage_bucket": "furniture-shopy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597603192637:android:60de3a327da5033800bf54",
+        "android_client_info": {
+          "package_name": "com.example.furniture_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597603192637-0sb7din3fgrtd5u0mjdo52ouop0qcio3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJTx6hwsDR-nWyXiNBDr-rTyRFwWsGqRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597603192637-0sb7din3fgrtd5u0mjdo52ouop0qcio3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "597603192637-jd815qqr8okp3cu3uldegm50hjp5j5ad.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.furnitureShop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
