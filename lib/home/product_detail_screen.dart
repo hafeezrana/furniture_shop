@@ -8,11 +8,17 @@ import 'package:furniture_shop/utils/widgets/text_style.dart';
 import '../../../utils/constants/colors_consts.dart';
 import '../cart/cart_screen.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
 
   static const route = '/productScreen';
+  // Product? product;
 
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

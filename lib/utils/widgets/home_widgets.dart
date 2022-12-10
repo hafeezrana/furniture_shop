@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:furniture_shop/utils/constants/images_consts.dart';
-
 import '../../cart/cart_screen.dart';
 import '../constants/colors_consts.dart';
 import 'text_style.dart';
@@ -16,7 +14,7 @@ class ReusableProduct extends StatelessWidget {
 
   String? imageUrl;
   String? productName;
-  String? price;
+  double? price;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +27,7 @@ class ReusableProduct extends StatelessWidget {
               alignment: Alignment.bottomRight,
               children: [
                 Container(
+                  height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
                     color: ConstColors.white2,
@@ -36,9 +35,12 @@ class ReusableProduct extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Hero(
-                        tag: 'hero',
-                        child: Image.network(ConstsImages.randomImage,
-                            fit: BoxFit.cover)),
+                      tag: 'hero',
+                      child: Image.network(
+                        imageUrl!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -50,11 +52,15 @@ class ReusableProduct extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         color: ConstColors.white),
                     child: IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, CartScreen.route);
-                        },
-                        icon: const Icon(Icons.shopping_bag,
-                            color: ConstColors.black2, size: 34)),
+                      onPressed: () {
+                        Navigator.pushNamed(context, CartScreen.route);
+                      },
+                      icon: const Icon(
+                        Icons.shopping_bag,
+                        color: ConstColors.black2,
+                        size: 34,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -64,7 +70,7 @@ class ReusableProduct extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(productName!, style: MyTextStyle.textStyle2),
           ),
-          Text(price!, style: MyTextStyle.textStyle2b),
+          Text(price.toString(), style: MyTextStyle.textStyle2b),
         ],
       ),
     );

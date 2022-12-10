@@ -6,7 +6,7 @@ class Product {
   final String? title;
   final String? description;
   final String? imageUrl;
-  final List<int>? color;
+  final List<String>? color;
   final int? quantity;
   final double? price;
 
@@ -23,7 +23,7 @@ class Product {
     String? title,
     String? description,
     String? imageUrl,
-    List<int>? color,
+    List<String>? color,
     int? quantity,
     double? price,
   }) {
@@ -67,16 +67,11 @@ class Product {
       title: map['title'],
       description: map['description'],
       imageUrl: map['imageUrl'],
-      color: List<int>.from(map['color']),
+      color: List<String>.from(map['color']),
       quantity: map['quantity']?.toInt(),
       price: map['price']?.toDouble(),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -105,4 +100,9 @@ class Product {
         quantity.hashCode ^
         price.hashCode;
   }
+
+  String toJson() => json.encode(toMap());
+
+  factory Product.fromJson(String source) =>
+      Product.fromMap(json.decode(source));
 }

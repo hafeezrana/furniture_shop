@@ -47,30 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCXaz959ZNqBGMiPZ1rjgjAqX3mGeNIxsc',
-    appId: '1:597603192637:web:fe0e4aaa4ba2af4000bf54',
-    messagingSenderId: '597603192637',
-    projectId: 'furniture-shopy',
-    authDomain: 'furniture-shopy.firebaseapp.com',
-    storageBucket: 'furniture-shopy.appspot.com',
-    measurementId: 'G-2E9VFMQSYE',
+    apiKey: 'AIzaSyAYw1Jxnsvd-YsfFRrOgh6VpuFCXzasy08',
+    appId: '1:4699676537:web:1a9b7449150f4d58b659a8',
+    messagingSenderId: '4699676537',
+    projectId: 'furniture-shop-4c88a',
+    authDomain: 'furniture-shop-4c88a.firebaseapp.com',
+    storageBucket: 'furniture-shop-4c88a.appspot.com',
+    measurementId: 'G-N64J5F9R59',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDJTx6hwsDR-nWyXiNBDr-rTyRFwWsGqRA',
-    appId: '1:597603192637:android:60de3a327da5033800bf54',
-    messagingSenderId: '597603192637',
-    projectId: 'furniture-shopy',
-    storageBucket: 'furniture-shopy.appspot.com',
+    apiKey: 'AIzaSyDMFJDUZfu86fp5DZNAKZ3TVJhjDFczh0E',
+    appId: '1:4699676537:android:340a9894f0cf9ccab659a8',
+    messagingSenderId: '4699676537',
+    projectId: 'furniture-shop-4c88a',
+    storageBucket: 'furniture-shop-4c88a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDZtqIDsJBQ92pXjHBK2rHmf0V7PRD6z8o',
-    appId: '1:597603192637:ios:362232a39a3ee84900bf54',
-    messagingSenderId: '597603192637',
-    projectId: 'furniture-shopy',
-    storageBucket: 'furniture-shopy.appspot.com',
-    iosClientId: '597603192637-jd815qqr8okp3cu3uldegm50hjp5j5ad.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCJSEzmjCSLvW7w9_uPEeWmbV0NjD-YXMs',
+    appId: '1:4699676537:ios:3c89513c6ea7c5b3b659a8',
+    messagingSenderId: '4699676537',
+    projectId: 'furniture-shop-4c88a',
+    storageBucket: 'furniture-shop-4c88a.appspot.com',
+    iosClientId: '4699676537-ou9kqjqbfofchajnd55nc3k04c3a4h7c.apps.googleusercontent.com',
     iosBundleId: 'com.example.furnitureShop',
   );
 }

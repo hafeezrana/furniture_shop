@@ -1,6 +1,7 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'package:furniture_shop/home/category_item_list.dart';
+import 'package:furniture_shop/model/product.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
@@ -17,6 +18,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final _firestore = FirebaseFirestore.instance;
+
+  Stream<QuerySnapshot<Product>> watchProduct() {
+    return _firestore
+        .collection('products')
+        .withConverter<Product>(
+          fromFirestore: (snapshot, _) => Product.fromMap(snapshot.data()!),
+          toFirestore: (model, _) => model.toMap(),
+        )
+        .snapshots();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text('BEAUTIFUL', style: MyTextStyle.textStyle3b)
                     ],
                   ),
-                  const Icon(Icons.shopping_cart_outlined,
-                      size: 30, color: ConstColors.black2),
+                  const Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 30,
+                    color: ConstColors.black2,
+                  ),
                 ],
               ),
             ),
@@ -45,92 +60,58 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 100,
               width: MediaQuery.of(context).size.width,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ConstColors.black2),
-                              alignment: Alignment.center,
-                              child: const Icon(Icons.star,
-                                  color: ConstColors.white, size: 36)),
-                          const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text('popular',
-                                  style: MyTextStyle.textStyle2b))
-                        ],
-                      ),
-                    ),
-                  ),
-                  // ReusableContainer1(Icons.star, 'Popular', () {}),
-                  ReusableContainer1(Icons.chair_alt_rounded, 'Chair', () {}),
-                  ReusableContainer1(Icons.table_bar_outlined, 'Table', () {}),
-                  ReusableContainer1(Icons.chair, 'Arm-chair', () {}),
-                  ReusableContainer1(Icons.bed_outlined, 'Bed', () {}),
-                  ReusableContainer1(
-                      Icons.door_back_door_outlined, 'Door', () {}),
-                  ReusableContainer1(Icons.window_rounded, 'Window', () {}),
-                ],
-              ),
+              child: CategoryItemList(),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height / 1,
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 7 / 13),
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, ProductDetailScreen.route);
-                          },
-                          child: ReusableProduct(
-                              productName: 'Wooden Chair', price: '\$30')),
-                    );
+                child: StreamBuilder<QuerySnapshot<Product>>(
+                  stream: watchProduct(),
+                  builder: (context, snapshot) {
+                    final products = snapshot.data?.docs;
+                    print('$products -------');
+
+                    if (!snapshot.hasData || products == null) {
+                      return const Text('no data');
+                    } else {
+                      return GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 5 / 6,
+                        ),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final product = products[index].data();
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 6,
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ProductDetailScreen.route,
+                                );
+                              },
+                              child: ReusableProduct(
+                                productName: product.title,
+                                price: product.price,
+                                imageUrl: product.imageUrl,
+
+                                // price: '\$${product?.price}',
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }
                   },
                 ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget ReusableContainer1(
-      IconData? icon, String? title, void Function()? onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: ConstColors.white),
-                alignment: Alignment.center,
-                child: Icon(icon, color: ConstColors.black2, size: 34)),
-            Padding(padding: const EdgeInsets.all(8.0), child: Text(title!))
           ],
         ),
       ),
