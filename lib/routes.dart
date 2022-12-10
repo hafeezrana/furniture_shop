@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/payment/payment_methods_scrn.dart';
 import 'package:furniture_shop/profile/my_profile_screen.dart';
+import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 
 import 'address/add_address_scrn.dart';
 import 'address/shipping_addresses.dart';
@@ -16,7 +17,7 @@ import 'home/product_detail_screen.dart';
 import 'myorders/order_screen.dart';
 import 'notification/notification_screen.dart';
 import 'payment/add_payment_screen.dart';
-import 'reviews/reviews_screen.dart';
+import 'reviews/my_reviews_screen.dart';
 import 'setting/setting_screen.dart';
 
 class RouteGenerator {
@@ -70,8 +71,12 @@ class RouteGenerator {
       case AddPaymentMethodScrn.route:
         return route(AddPaymentMethodScrn.route, const AddPaymentMethodScrn());
 
-      case ReviewScreen.route:
-        return route(ReviewScreen.route, const ReviewScreen());
+      case MyReviewScreen.route:
+        return route(MyReviewScreen.route, const MyReviewScreen());
+
+      case ReviewsAndRatingScreen.route:
+        return route(
+            ReviewsAndRatingScreen.route, const ReviewsAndRatingScreen());
 
       case SettingScreen.route:
         return route(SettingScreen.route, const SettingScreen());

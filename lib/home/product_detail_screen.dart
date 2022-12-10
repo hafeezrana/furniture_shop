@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
@@ -132,12 +133,18 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ),
               Row(
-                children: const [
-                  Icon(Icons.star, color: ConstColors.green),
-                  Padding(
+                children: [
+                  const Icon(Icons.star, color: ConstColors.green),
+                  const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text('4.5', style: MyTextStyle.textStyle2)),
-                  Text('(20 Reviews)', style: MyTextStyle.textStyle2),
+                  InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, ReviewsAndRatingScreen.route);
+                      },
+                      child: const Text('(20 Reviews)',
+                          style: MyTextStyle.textStyle2)),
                 ],
               ),
               const Padding(

@@ -8,7 +8,7 @@ import '../address/shipping_addresses.dart';
 import '../authentication/signin/signIn_screen.dart';
 import '../myorders/order_screen.dart';
 import '../payment/payment_methods_scrn.dart';
-import '../reviews/reviews_screen.dart';
+import '../reviews/my_reviews_screen.dart';
 import '../setting/setting_screen.dart';
 
 class MyProfilesScreen extends StatefulWidget {
@@ -98,7 +98,7 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'My Reviews',
                 text2: 'Review for 3 items',
                 onTap: () {
-                  Navigator.pushNamed(context, ReviewScreen.route);
+                  Navigator.pushNamed(context, MyReviewScreen.route);
                 },
               ),
               MyProfileCard(

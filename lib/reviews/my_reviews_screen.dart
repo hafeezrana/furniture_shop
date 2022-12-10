@@ -5,16 +5,16 @@ import '../../../utils/constants/images_consts.dart';
 import '../../../utils/widgets/reusable_card.dart';
 import '../../../utils/widgets/text_style.dart';
 
-class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({super.key});
+class MyReviewScreen extends StatefulWidget {
+  const MyReviewScreen({super.key});
 
-  static const route = '/ReviewScreen';
+  static const route = '/MyReviewScreen';
 
   @override
-  State<ReviewScreen> createState() => _ReviewScreenState();
+  State<MyReviewScreen> createState() => _MyReviewScreenState();
 }
 
-class _ReviewScreenState extends State<ReviewScreen> {
+class _MyReviewScreenState extends State<MyReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
