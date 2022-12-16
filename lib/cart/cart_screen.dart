@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
+import 'package:furniture_shop/model/cart.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 
 import '../../utils/constants/colors_consts.dart';
-import '../../utils/constants/images_consts.dart';
 import '../../utils/widgets/text_style.dart';
 import 'check_out_screen.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  const CartScreen({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
 
   static const route = '/cartScreen';
+
+  final Cart cart;
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -50,8 +55,10 @@ class _CartScreenState extends State<CartScreen> {
                       width: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.network(ConstsImages.randomImage,
-                            fit: BoxFit.cover),
+                        child: Image.network(
+                          widget.cart.product.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -60,9 +67,14 @@ class _CartScreenState extends State<CartScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Text('item name',
-                              style: MyTextStyle.textStyle2),
-                          const Text('\$ 0.0', style: MyTextStyle.textStyle3),
+                          Text(
+                            widget.cart.product.title,
+                            style: MyTextStyle.textStyle2,
+                          ),
+                          Text(
+                            '\$ ${widget.cart.product.price}',
+                            style: MyTextStyle.textStyle3,
+                          ),
                           Row(
                             children: [
                               Container(
@@ -72,14 +84,22 @@ class _CartScreenState extends State<CartScreen> {
                                     borderRadius: BorderRadius.circular(8),
                                     color: ConstColors.white2),
                                 child: InkWell(
-                                    onTap: () {},
-                                    child: const Icon(Icons.remove,
-                                        color: ConstColors.black3, size: 22)),
+                                  onTap: () async {},
+                                  child: const Icon(
+                                    Icons.remove,
+                                    color: ConstColors.black3,
+                                    size: 22,
+                                  ),
+                                ),
                               ),
-                              const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 8),
-                                  child: Text('04',
-                                      style: MyTextStyle.textStyle2)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  '${widget.cart.product.quantity}',
+                                  style: MyTextStyle.textStyle2,
+                                ),
+                              ),
                               Container(
                                 height: 30,
                                 width: 30,
@@ -88,9 +108,13 @@ class _CartScreenState extends State<CartScreen> {
                                   color: ConstColors.white2,
                                 ),
                                 child: InkWell(
-                                    onTap: () {},
-                                    child: const Icon(Icons.add,
-                                        color: ConstColors.black3, size: 22)),
+                                  onTap: () {},
+                                  child: const Icon(
+                                    Icons.add,
+                                    color: ConstColors.black3,
+                                    size: 22,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -123,11 +147,13 @@ class _CartScreenState extends State<CartScreen> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 1.4,
                             child: const TextField(
-                                textAlign: TextAlign.start,
-                                decoration: InputDecoration(
-                                    hintText: 'Enter Your promo code',
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none)),
+                              textAlign: TextAlign.start,
+                              decoration: InputDecoration(
+                                hintText: 'Enter Your promo code',
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                              ),
+                            ),
                           ),
                           const SizedBox(width: 4),
                           SizedBox(
@@ -135,9 +161,10 @@ class _CartScreenState extends State<CartScreen> {
                             width: MediaQuery.of(context).size.width / 6.6,
                             child: Container(
                               decoration: BoxDecoration(
-                                  border: Border.all(color: ConstColors.black2),
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ConstColors.black3),
+                                border: Border.all(color: ConstColors.black2),
+                                borderRadius: BorderRadius.circular(8),
+                                color: ConstColors.black3,
+                              ),
                               width: 20,
                               child: InkWell(
                                 onTap: () {},
@@ -162,9 +189,12 @@ class _CartScreenState extends State<CartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text('Total:', style: MyTextStyle.textStyle2),
-                          Text('\$67',
-                              style: MyTextStyle.textStyle3
-                                  .copyWith(fontWeight: FontWeight.w600)),
+                          Text(
+                            '\$67',
+                            style: MyTextStyle.textStyle3.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ],
                       ),
                     ),

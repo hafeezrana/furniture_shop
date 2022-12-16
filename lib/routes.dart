@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/main.dart';
+import 'package:furniture_shop/model/cart.dart';
+import 'package:furniture_shop/model/product.dart';
 import 'package:furniture_shop/payment/payment_methods_scrn.dart';
 import 'package:furniture_shop/profile/my_profile_screen.dart';
 import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
@@ -23,6 +26,9 @@ import 'setting/setting_screen.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AuthStateChanges.route:
+        return route(AuthStateChanges.route, AuthStateChanges());
+
       case SignInScreen.route:
         return route(SignInScreen.route, const SignInScreen());
 
@@ -36,12 +42,23 @@ class RouteGenerator {
         return route(HomeScreen.route, const HomeScreen());
 
       case ProductDetailScreen.route:
-        return route(ProductDetailScreen.route, const ProductDetailScreen());
+        final args = settings.arguments as Product;
+        return route(
+            ProductDetailScreen.route,
+            ProductDetailScreen(
+              product: args,
+            ));
       case FavoriteScreen.route:
         return route(FavoriteScreen.route, const FavoriteScreen());
 
       case CartScreen.route:
-        return route(CartScreen.route, const CartScreen());
+        final args = settings.arguments as Cart;
+        return route(
+          CartScreen.route,
+          CartScreen(
+            cart: args,
+          ),
+        );
 
       case CheckOutScreen.route:
         return route(CheckOutScreen.route, const CheckOutScreen());

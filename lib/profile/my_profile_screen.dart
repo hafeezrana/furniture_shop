@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/authentication/auth_service.dart';
+import 'package:furniture_shop/main.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
 import '../address/shipping_addresses.dart';
-import '../authentication/signin/signIn_screen.dart';
 import '../myorders/order_screen.dart';
 import '../payment/payment_methods_scrn.dart';
 import '../reviews/my_reviews_screen.dart';
@@ -39,8 +40,9 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                           const Icon(Icons.search, color: ConstColors.black2)),
                   const Text('Profile', style: MyTextStyle.textStyle3b),
                   IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, SignInScreen.route);
+                    onPressed: () async {
+                      await AuthService().signOut();
+                      Navigator.pushNamed(context, AuthStateChanges.route);
                     },
                     icon: const Icon(Icons.logout, color: ConstColors.black2),
                   )

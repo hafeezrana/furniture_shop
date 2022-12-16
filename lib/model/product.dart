@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 class Product {
   final String title;
   final String? description;
+  final bool? isFavorite;
   final String imageUrl;
   final List<String>? color;
   final int quantity;
@@ -14,6 +15,7 @@ class Product {
   const Product({
     required this.title,
     this.description,
+    this.isFavorite,
     required this.imageUrl,
     this.color,
     required this.quantity,
@@ -23,6 +25,7 @@ class Product {
   Product copyWith({
     String? title,
     String? description,
+    bool? isFavorite,
     String? imageUrl,
     List<String>? color,
     int? quantity,
@@ -31,6 +34,7 @@ class Product {
     return Product(
       title: title ?? this.title,
       description: description ?? this.description,
+      isFavorite: isFavorite ?? this.isFavorite,
       imageUrl: imageUrl ?? this.imageUrl,
       color: color ?? this.color,
       quantity: quantity ?? this.quantity,
@@ -44,6 +48,9 @@ class Product {
     result.addAll({'title': title});
     if (description != null) {
       result.addAll({'description': description});
+    }
+    if (isFavorite != null) {
+      result.addAll({'isFavorite': isFavorite});
     }
     result.addAll({'imageUrl': imageUrl});
     if (color != null) {
@@ -59,6 +66,7 @@ class Product {
     return Product(
       title: map['title'] ?? '',
       description: map['description'],
+      isFavorite: map['isFavorite'],
       imageUrl: map['imageUrl'] ?? '',
       color: List<String>.from(map['color']),
       quantity: map['quantity']?.toInt() ?? 0,
@@ -73,6 +81,7 @@ class Product {
     return other is Product &&
         other.title == title &&
         other.description == description &&
+        other.isFavorite == isFavorite &&
         other.imageUrl == imageUrl &&
         listEquals(other.color, color) &&
         other.quantity == quantity &&
@@ -83,6 +92,7 @@ class Product {
   int get hashCode {
     return title.hashCode ^
         description.hashCode ^
+        isFavorite.hashCode ^
         imageUrl.hashCode ^
         color.hashCode ^
         quantity.hashCode ^
@@ -96,6 +106,6 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(title: $title, description: $description, imageUrl: $imageUrl, color: $color, quantity: $quantity, price: $price)';
+    return 'Product(title: $title, description: $description, isFavorite: $isFavorite, imageUrl: $imageUrl, color: $color, quantity: $quantity, price: $price)';
   }
 }

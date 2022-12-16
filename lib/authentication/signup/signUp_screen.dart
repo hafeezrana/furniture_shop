@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/authentication/auth_service.dart';
+import 'package:furniture_shop/model/user.dart';
 
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusbale_textformf.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
-import '../../../bottom_navbar.dart';
+import '../../main.dart';
+import '../firestore_service.dart';
 import '../signin/signIn_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -16,6 +19,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,21 +76,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text('Name', style: MyTextStyle.textStyle2),
-                              ReUsableTextFField(labelText: ''),
-                              SizedBox(height: 10),
-                              Text('Email', style: MyTextStyle.textStyle2),
-                              ReUsableTextFField(labelText: ''),
-                              SizedBox(height: 10),
-                              Text('Password', style: MyTextStyle.textStyle2),
+                            children: [
+                              const Text('Name', style: MyTextStyle.textStyle2),
                               ReUsableTextFField(
-                                  labelText: '',
-                                  icon: Icon(Icons.remove_red_eye_outlined)),
-                              SizedBox(height: 10),
-                              Text('Confirm Password',
+                                controller: nameController,
+                                labelText: '',
+                              ),
+                              const SizedBox(height: 10),
+                              const Text('Email',
                                   style: MyTextStyle.textStyle2),
                               ReUsableTextFField(
+                                controller: emailController,
+                                labelText: '',
+                              ),
+                              const SizedBox(height: 10),
+                              const Text('Password',
+                                  style: MyTextStyle.textStyle2),
+                              ReUsableTextFField(
+                                controller: passwordController,
+                                labelText: '',
+                                icon: const Icon(Icons.remove_red_eye_outlined),
+                              ),
+                              const SizedBox(height: 10),
+                              const Text('Confirm Password',
+                                  style: MyTextStyle.textStyle2),
+                              const ReUsableTextFField(
                                   labelText: '',
                                   icon: Icon(Icons.remove_red_eye_outlined)),
                             ],
@@ -93,16 +110,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 10),
                       ResuableButton(
                         buttonText: 'SIGN UP',
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, BottomNavBarScreen.route);
+                        onTap: () async {
+                          await AuthService().registerUser(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+
+                          await FirestoreService().addUser(
+                            User(
+                              name: nameController.text,
+                              email: emailController.text,
+                            ),
+                          );
+                          setState(() {});
+
+                          Navigator.pushNamed(context, AuthStateChanges.route);
                         },
                       ),
                       const SizedBox(height: 10),
                       TextButton(
-                        child: Text('Already have an account? SIGN IN',
-                            style: MyTextStyle.textStyle2
-                                .copyWith(color: ConstColors.black)),
+                        child: Text(
+                          'Already have an account? SIGN IN',
+                          style: MyTextStyle.textStyle2
+                              .copyWith(color: ConstColors.black),
+                        ),
                         onPressed: () {
                           Navigator.pushNamed(context, SignInScreen.route);
                         },

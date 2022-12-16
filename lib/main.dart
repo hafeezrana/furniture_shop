@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/bottom_navbar.dart';
 import 'package:furniture_shop/routes.dart';
 
+import 'authentication/auth_service.dart';
 import 'authentication/signin/signIn_screen.dart';
 import 'firebase_options.dart';
 
@@ -25,9 +28,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SignInScreen(),
       onGenerateRoute: RouteGenerator.generateRoute,
-      // initialRoute: SignInScreen.route,
+      initialRoute: AuthStateChanges.route,
+    );
+  }
+}
+
+class AuthStateChanges extends StatelessWidget {
+  AuthStateChanges({Key? key}) : super(key: key);
+
+  static const String route = '/';
+
+  final authService = AuthService();
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: authService.authStateChanges,
+      builder: (conext, snapshot) {
+        if (snapshot.data != null) {
+          return const BottomNavBarScreen();
+        } else {
+          return const SignInScreen();
+        }
+      },
     );
   }
 }

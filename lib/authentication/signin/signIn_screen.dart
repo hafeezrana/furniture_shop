@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/bottom_navbar.dart';
+import 'package:furniture_shop/authentication/auth_service.dart';
+import 'package:furniture_shop/main.dart';
 
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
@@ -18,6 +19,9 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,37 +79,56 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text('Email', style: MyTextStyle.textStyle2),
+                            children: [
+                              const Text('Email',
+                                  style: MyTextStyle.textStyle2),
                               ReUsableTextFField(
+                                controller: emailController,
                                 labelText: '',
                               ),
-                              SizedBox(height: 18),
-                              Text('Password', style: MyTextStyle.textStyle2),
+                              const SizedBox(height: 18),
+                              const Text(
+                                'Password',
+                                style: MyTextStyle.textStyle2,
+                              ),
                               ReUsableTextFField(
-                                  labelText: '',
-                                  icon: Icon(Icons.remove_red_eye_outlined)),
+                                controller: passwordController,
+                                labelText: '',
+                                icon: const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Text('Forgot Password',
-                          style: MyTextStyle.textStyle2
-                              .copyWith(fontWeight: FontWeight.w600)),
+                      Text(
+                        'Forgot Password',
+                        style: MyTextStyle.textStyle2
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
                       const SizedBox(height: 10),
                       ResuableButton(
                         buttonText: 'Log In',
-                        onTap: () {
+                        onTap: () async {
+                          await AuthService().emailLogin(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
                           Navigator.pushNamed(
-                              context, BottomNavBarScreen.route);
+                            context,
+                            AuthStateChanges.route,
+                          );
                         },
                       ),
                       const SizedBox(height: 10),
                       TextButton(
-                        child: Text('SIGN UP',
-                            style: MyTextStyle.textStyle2
-                                .copyWith(color: ConstColors.black)),
+                        child: Text(
+                          'SIGN UP',
+                          style: MyTextStyle.textStyle2
+                              .copyWith(color: ConstColors.black),
+                        ),
                         onPressed: () {
                           Navigator.pushNamed(context, SignUpScreen.route);
                         },

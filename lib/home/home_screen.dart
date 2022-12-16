@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 5 / 6,
+                          childAspectRatio: 5 / 7,
                         ),
                         itemCount: products.length,
                         itemBuilder: (context, index) {
@@ -92,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
+                                  arguments: product,
                                   context,
                                   ProductDetailScreen.route,
                                 );
@@ -100,8 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 productName: product.title,
                                 price: product.price,
                                 imageUrl: product.imageUrl,
-
-                                // price: '\$${product?.price}',
                               ),
                             ),
                           );

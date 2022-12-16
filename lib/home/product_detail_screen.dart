@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/authentication/firestore_service.dart';
+import 'package:furniture_shop/model/cart.dart';
 import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 
-import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
 import '../../../utils/constants/colors_consts.dart';
 import '../cart/cart_screen.dart';
+import '../model/product.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({required this.product, super.key});
 
   static const route = '/productScreen';
-  // Product? product;
+  final Product product;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  bool isFavorite = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +47,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         padding: const EdgeInsets.only(left: 18.0),
                         child: ClipRRect(
                           borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(40)),
+                            bottomLeft: Radius.circular(40),
+                          ),
                           child: Hero(
-                              tag: 'hero',
-                              child: Image.network(ConstsImages.randomImage,
-                                  fit: BoxFit.fill)),
+                            tag: 'hero',
+                            child: Image.network(
+                              widget.product.imageUrl,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -63,11 +71,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 borderRadius: BorderRadius.circular(8),
                                 color: ConstColors.white),
                             child: InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Icon(Icons.arrow_back_ios_new,
-                                    color: ConstColors.black2, size: 22)),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(
+                                Icons.arrow_back_ios_new,
+                                color: ConstColors.black2,
+                                size: 22,
+                              ),
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 36),
@@ -97,41 +109,62 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ],
                 ),
               ),
-              const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text('Wooden Chair', style: MyTextStyle.textStyle3)),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  widget.product.title,
+                  style: MyTextStyle.textStyle3,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('\$ 30', style: MyTextStyle.textStyle4),
+                    Text(
+                      '\$ ${widget.product.price}',
+                      style: MyTextStyle.textStyle4,
+                    ),
                     Row(
                       children: [
                         Container(
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: ConstColors.white2),
+                            borderRadius: BorderRadius.circular(8),
+                            color: ConstColors.white2,
+                          ),
                           child: InkWell(
-                              onTap: () {},
-                              child: const Icon(Icons.remove,
-                                  color: ConstColors.black3, size: 22)),
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.remove,
+                              color: ConstColors.black3,
+                              size: 22,
+                            ),
+                          ),
                         ),
-                        const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8),
-                            child: Text('04', style: MyTextStyle.textStyle2)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '${widget.product.quantity}',
+                            style: MyTextStyle.textStyle2,
+                          ),
+                        ),
                         Container(
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: ConstColors.white2),
+                            borderRadius: BorderRadius.circular(8),
+                            color: ConstColors.white2,
+                          ),
                           child: InkWell(
-                              onTap: () {},
-                              child: const Icon(Icons.add,
-                                  color: ConstColors.black3, size: 22)),
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.add,
+                              color: ConstColors.black3,
+                              size: 22,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -153,12 +186,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           style: MyTextStyle.textStyle2)),
                 ],
               ),
-              const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                      'Wooden Chair is made up of natural wood. Design is so simle and good.Now a days it is most common used in family.With three different colors where you select with your best choice for home.',
-                      maxLines: 10,
-                      style: MyTextStyle.textStyle1)),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  widget.product.description ??
+                      'Description will be added soon',
+                  maxLines: 10,
+                  style: MyTextStyle.textStyle1,
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -166,17 +202,44 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: ConstColors.white2),
+                      borderRadius: BorderRadius.circular(8),
+                      color: ConstColors.white2,
+                    ),
                     alignment: Alignment.center,
-                    child: const Icon(Icons.bookmark_border,
-                        color: ConstColors.black2, size: 34),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.product.copyWith(isFavorite: !isFavorite);
+                        });
+                      },
+                      icon: Icon(
+                        widget.product.isFavorite!
+                            ? Icons.bookmark
+                            : Icons.bookmark_border,
+                        color: ConstColors.black2,
+                        size: 34,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   ResuableButton(
                     buttonText: 'Add To Cart',
-                    onTap: () {
-                      Navigator.pushNamed(context, CartScreen.route);
+                    onTap: () async {
+                      final newCart = Cart(
+                        product: Product(
+                          title: widget.product.title,
+                          imageUrl: widget.product.imageUrl,
+                          quantity: widget.product.quantity,
+                          price: widget.product.price,
+                        ),
+                      );
+                      await FirestoreService().addToCart(newCart);
+
+                      Navigator.pushNamed(
+                        context,
+                        arguments: newCart,
+                        CartScreen.route,
+                      );
                     },
                   )
                 ],
