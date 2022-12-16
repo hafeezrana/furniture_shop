@@ -2,21 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+@immutable
 class Product {
-  final String? title;
+  final String title;
   final String? description;
-  final String? imageUrl;
+  final String imageUrl;
   final List<String>? color;
-  final int? quantity;
-  final double? price;
+  final int quantity;
+  final double price;
 
-  Product({
-    this.title,
+  const Product({
+    required this.title,
     this.description,
-    this.imageUrl,
+    required this.imageUrl,
     this.color,
-    this.quantity,
-    this.price,
+    required this.quantity,
+    required this.price,
   });
 
   Product copyWith({
@@ -40,42 +41,29 @@ class Product {
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    if (title != null) {
-      result.addAll({'title': title});
-    }
+    result.addAll({'title': title});
     if (description != null) {
       result.addAll({'description': description});
     }
-    if (imageUrl != null) {
-      result.addAll({'imageUrl': imageUrl});
-    }
+    result.addAll({'imageUrl': imageUrl});
     if (color != null) {
       result.addAll({'color': color});
     }
-    if (quantity != null) {
-      result.addAll({'quantity': quantity});
-    }
-    if (price != null) {
-      result.addAll({'price': price});
-    }
+    result.addAll({'quantity': quantity});
+    result.addAll({'price': price});
 
     return result;
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      title: map['title'],
+      title: map['title'] ?? '',
       description: map['description'],
-      imageUrl: map['imageUrl'],
+      imageUrl: map['imageUrl'] ?? '',
       color: List<String>.from(map['color']),
-      quantity: map['quantity']?.toInt(),
-      price: map['price']?.toDouble(),
+      quantity: map['quantity']?.toInt() ?? 0,
+      price: map['price']?.toDouble() ?? 0.0,
     );
-  }
-
-  @override
-  String toString() {
-    return 'Product(title: $title, description: $description, imageUrl: $imageUrl, color: $color, quantity: $quantity, price: $price)';
   }
 
   @override
@@ -105,4 +93,9 @@ class Product {
 
   factory Product.fromJson(String source) =>
       Product.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Product(title: $title, description: $description, imageUrl: $imageUrl, color: $color, quantity: $quantity, price: $price)';
+  }
 }
