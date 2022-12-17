@@ -6,6 +6,7 @@ import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
 import '../../../utils/widgets/home_widgets.dart';
+import '../authentication/firestore_service.dart';
 import 'product_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,18 +19,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _firestore = FirebaseFirestore.instance;
-
-  Stream<QuerySnapshot<Product>> watchProduct() {
-    return _firestore
-        .collection('products')
-        .withConverter<Product>(
-          fromFirestore: (snapshot, _) => Product.fromMap(snapshot.data()!),
-          toFirestore: (model, _) => model.toMap(),
-        )
-        .snapshots();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height / 1,
                 child: StreamBuilder<QuerySnapshot<Product>>(
-                  stream: watchProduct(),
+                  stream: FirestoreService().watchProduct(),
                   builder: (context, snapshot) {
                     final products = snapshot.data?.docs;
                     print('$products -------');
