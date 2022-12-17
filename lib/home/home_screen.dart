@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/home/category_item_list.dart';
-import 'package:furniture_shop/model/product.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
@@ -9,18 +8,15 @@ import '../../../utils/widgets/home_widgets.dart';
 import '../authentication/firestore_service.dart';
 import 'product_detail_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   static const route = '/home';
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productValue = ref.watch(productStreamProvider);
 
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -54,16 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height / 1,
-                child: StreamBuilder<QuerySnapshot<Product>>(
-                  stream: FirestoreService().watchProduct(),
-                  builder: (context, snapshot) {
-                    final products = snapshot.data?.docs;
-                    print('$products -------');
-
-                    if (!snapshot.hasData || products == null) {
-                      return const Text('no data');
-                    } else {
+                  height: MediaQuery.of(context).size.height / 1,
+                  child: productValue.when(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (error, _) => Center(child: Text(error.toString())),
+                    data: (data) {
+                      final products = data.docs;
                       return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -95,10 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                       );
-                    }
-                  },
-                ),
-              ),
+                    },
+                  )),
             ),
           ],
         ),

@@ -263,11 +263,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
               await FirestoreService().addToCart(newCart);
 
-              Navigator.pushNamed(
-                context,
-                arguments: newCart,
-                CartScreen.route,
-              );
+              Navigator.pushNamed(context, CartScreen.route);
             },
           )
         ],

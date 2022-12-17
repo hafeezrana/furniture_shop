@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/main.dart';
-import 'package:furniture_shop/model/cart.dart';
 import 'package:furniture_shop/model/product.dart';
 import 'package:furniture_shop/payment/payment_methods_scrn.dart';
 import 'package:furniture_shop/profile/my_profile_screen.dart';
@@ -52,13 +51,7 @@ class RouteGenerator {
         return route(FavoriteScreen.route, const FavoriteScreen());
 
       case CartScreen.route:
-        final args = settings.arguments as Cart;
-        return route(
-          CartScreen.route,
-          CartScreen(
-            cart: args,
-          ),
-        );
+        return route(CartScreen.route, const CartScreen());
 
       case CheckOutScreen.route:
         return route(CheckOutScreen.route, const CheckOutScreen());

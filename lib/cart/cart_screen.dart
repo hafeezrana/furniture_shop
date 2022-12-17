@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/authentication/firestore_service.dart';
 
-import 'package:furniture_shop/model/cart.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 
@@ -10,32 +9,27 @@ import '../../utils/constants/colors_consts.dart';
 import '../../utils/widgets/text_style.dart';
 import 'check_out_screen.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends ConsumerWidget {
   const CartScreen({
     Key? key,
-    required this.cart,
+    // required this.cart,
   }) : super(key: key);
 
   static const route = '/cartScreen';
 
-  final Cart cart;
+  // final Cart cart;
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartValue = ref.watch(cartStreamProvider);
 
-class _CartScreenState extends State<CartScreen> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: ListView(
-            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                // height: MediaQuery.of(context).size.height / ,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -52,18 +46,14 @@ class _CartScreenState extends State<CartScreen> {
               const SizedBox(height: 10),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 1.5,
-                child: StreamBuilder<QuerySnapshot<Cart>>(
-                  stream: FirestoreService().watchcart(),
-                  builder: (context, snapshot) {
-                    final carts = snapshot.data?.docs;
-                    if (!snapshot.hasData || carts == null) {
-                      return const Text('no data');
-                    }
-
+                child: cartValue.when(
+                  data: (data) {
+                    final carts = data.docs;
                     return ListView.builder(
                       itemCount: carts.length,
                       itemBuilder: (context, index) {
-                        final cart = carts[index];
+                        final cart = carts[index].data();
+                        print('Cart ================= $cart');
 
                         return SizedBox(
                           height: 100,
@@ -76,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.network(
-                                    widget.cart.product.imageUrl,
+                                    cart.product.imageUrl,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -88,11 +78,11 @@ class _CartScreenState extends State<CartScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.cart.product.title,
+                                      cart.product.title,
                                       style: MyTextStyle.textStyle2,
                                     ),
                                     Text(
-                                      '\$ ${widget.cart.product.price}',
+                                      '\$ ${cart.product.price}',
                                       style: MyTextStyle.textStyle3,
                                     ),
                                     Row(
@@ -105,13 +95,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   BorderRadius.circular(8),
                                               color: ConstColors.white2),
                                           child: InkWell(
-                                            onTap: () async {
-                                              setState(() {});
-                                              await FirestoreService()
-                                                  .removeCart(
-                                                cart.id,
-                                              );
-                                            },
+                                            onTap: () async {},
                                             child: const Icon(
                                               Icons.remove,
                                               color: ConstColors.black3,
@@ -124,7 +108,7 @@ class _CartScreenState extends State<CartScreen> {
                                             horizontal: 8,
                                           ),
                                           child: Text(
-                                            '${widget.cart.product.quantity}',
+                                            '${cart.product.quantity}',
                                             style: MyTextStyle.textStyle2,
                                           ),
                                         ),
@@ -169,6 +153,13 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         );
                       },
+                    );
+                  },
+                  error: (error, stackTrace) =>
+                      Center(child: Text(error.toString())),
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
                   },
                 ),
