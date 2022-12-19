@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../cart/cart_screen.dart';
 import '../constants/colors_consts.dart';
 import 'text_style.dart';
 
 class ReusableProduct extends StatelessWidget {
-  ReusableProduct({
+  const ReusableProduct({
     Key? key,
     this.imageUrl,
     this.productName,
     this.price,
+    this.hero,
+    this.onBagTap,
   }) : super(key: key);
 
-  String? imageUrl;
-  String? productName;
-  double? price;
-
+  final String? imageUrl;
+  final String? productName;
+  final double? price;
+  final dynamic hero;
+  final VoidCallback? onBagTap;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,7 +37,7 @@ class ReusableProduct extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Hero(
-                      tag: 'hero',
+                      tag: hero,
                       child: Image.network(
                         imageUrl!,
                         fit: BoxFit.cover,
@@ -51,11 +53,9 @@ class ReusableProduct extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: ConstColors.white),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, CartScreen.route);
-                      },
-                      icon: const Icon(
+                    child: InkWell(
+                      onTap: onBagTap,
+                      child: const Icon(
                         Icons.shopping_bag,
                         color: ConstColors.black2,
                         size: 34,

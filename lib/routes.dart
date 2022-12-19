@@ -42,11 +42,12 @@ class RouteGenerator {
 
       case ProductDetailScreen.route:
         final args = settings.arguments as Product;
+
         return route(
-            ProductDetailScreen.route,
-            ProductDetailScreen(
-              product: args,
-            ));
+          ProductDetailScreen.route,
+          ProductDetailScreen(product: args),
+        );
+
       case FavoriteScreen.route:
         return route(FavoriteScreen.route, const FavoriteScreen());
 

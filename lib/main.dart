@@ -9,11 +9,13 @@ import 'authentication/auth_service.dart';
 import 'authentication/signin/signIn_screen.dart';
 import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // final firebaseAnalytics = FirebaseAnalytics.instance;
 
   runApp(
     const ProviderScope(

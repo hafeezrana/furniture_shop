@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:furniture_shop/cart/cart_notifier.dart';
 
+import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../utils/constants/colors_consts.dart';
 import '../authentication/firestore_service.dart';
@@ -10,21 +13,34 @@ import '../model/cart.dart';
 import '../model/product.dart';
 import '../utils/widgets/resusable_button.dart';
 
-class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({required this.product, super.key});
+class ProductDetailScreen extends ConsumerStatefulWidget {
+  const ProductDetailScreen({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   static const route = '/productScreen';
+
   final Product product;
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   bool isFavorite = false;
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(counterProvider);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final quantityProvider = ref.watch(counterProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -53,7 +69,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               bottomLeft: Radius.circular(40),
                             ),
                             child: Hero(
-                              tag: 'hero',
+                              tag: widget.product,
                               child: Image.network(
                                 widget.product.imageUrl,
                                 fit: BoxFit.fill,
@@ -149,7 +165,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               color: ConstColors.white2,
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                quantityProvider.decrement();
+                              },
                               child: const Icon(
                                 Icons.remove,
                                 color: ConstColors.black3,
@@ -160,7 +178,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                              '${widget.product.quantity}',
+                              // '${widget.product.quantity}',
+                              '${quantityProvider.quantity}',
                               style: MyTextStyle.textStyle2,
                             ),
                           ),
@@ -172,7 +191,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               color: ConstColors.white2,
                             ),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                // ref
+                                //     .watch(cartNotifierProvider.notifier)
+                                //     .increment();
+
+                                quantityProvider.increment();
+                              },
                               child: const Icon(
                                 Icons.add,
                                 color: ConstColors.black3,
@@ -252,16 +277,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ResuableButton(
             buttonText: 'Add To Cart',
             onTap: () async {
+              final cartId = const Uuid().v1();
               final newCart = Cart(
-                product: Product(
-                  title: widget.product.title,
-                  imageUrl: widget.product.imageUrl,
-                  quantity: widget.product.quantity,
-                  price: widget.product.price,
-                ),
+                cartId: cartId,
+                productId: widget.product.id,
+                title: widget.product.title,
+                imageUrl: widget.product.imageUrl,
+                quantity: quantityProvider.quantity,
+                price: widget.product.price,
               );
 
-              await FirestoreService().addToCart(newCart);
+              await FirestoreService().addToCart(newCart, cartId);
 
               Navigator.pushNamed(context, CartScreen.route);
             },

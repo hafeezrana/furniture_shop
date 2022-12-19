@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/authentication/firestore_service.dart';
+import 'package:furniture_shop/cart/cart_notifier.dart';
+import 'package:furniture_shop/model/cart.dart';
 
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
@@ -22,6 +24,7 @@ class CartScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartValue = ref.watch(cartStreamProvider);
+    final quantityProvider = ref.watch(counterProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -34,10 +37,11 @@ class CartScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios),
+                    ),
                     const Text('My Cart', style: MyTextStyle.textStyle3b),
                     const SizedBox(width: 10)
                   ],
@@ -49,11 +53,16 @@ class CartScreen extends ConsumerWidget {
                 child: cartValue.when(
                   data: (data) {
                     final carts = data.docs;
-                    return ListView.builder(
-                      itemCount: carts.length,
+                    return ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemCount: carts.isEmpty ? 0 : data.docs.length,
                       itemBuilder: (context, index) {
                         final cart = carts[index].data();
-                        print('Cart ================= $cart');
+
+                        debugPrint('Cart ================= $cart');
+                        final money = cart.price! * quantityProvider.quantity;
+                        final totalMoney = money * index;
+                        debugPrint('Total Price =========== ====== $money');
 
                         return SizedBox(
                           height: 100,
@@ -66,7 +75,7 @@ class CartScreen extends ConsumerWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.network(
-                                    cart.product.imageUrl,
+                                    cart.imageUrl!,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -78,11 +87,11 @@ class CartScreen extends ConsumerWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      cart.product.title,
+                                      cart.title!,
                                       style: MyTextStyle.textStyle2,
                                     ),
                                     Text(
-                                      '\$ ${cart.product.price}',
+                                      '\$ ${cart.price}',
                                       style: MyTextStyle.textStyle3,
                                     ),
                                     Row(
@@ -91,11 +100,21 @@ class CartScreen extends ConsumerWidget {
                                           height: 30,
                                           width: 30,
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: ConstColors.white2),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            color: ConstColors.white2,
+                                          ),
                                           child: InkWell(
-                                            onTap: () async {},
+                                            onTap: () {
+                                              quantityProvider.decrement();
+                                              FirestoreService().updateCart(
+                                                Cart(
+                                                  quantity:
+                                                      quantityProvider.quantity,
+                                                ),
+                                                cart.cartId!,
+                                              );
+                                            },
                                             child: const Icon(
                                               Icons.remove,
                                               color: ConstColors.black3,
@@ -108,7 +127,7 @@ class CartScreen extends ConsumerWidget {
                                             horizontal: 8,
                                           ),
                                           child: Text(
-                                            '${cart.product.quantity}',
+                                            '${cart.quantity}',
                                             style: MyTextStyle.textStyle2,
                                           ),
                                         ),
@@ -121,7 +140,15 @@ class CartScreen extends ConsumerWidget {
                                             color: ConstColors.white2,
                                           ),
                                           child: InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              quantityProvider.increment();
+                                              FirestoreService().updateCart(
+                                                Cart(
+                                                    quantity: quantityProvider
+                                                        .quantity),
+                                                cart.cartId!,
+                                              );
+                                            },
                                             child: const Icon(
                                               Icons.add,
                                               color: ConstColors.black3,
@@ -143,8 +170,16 @@ class CartScreen extends ConsumerWidget {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      Icon(Icons.cancel_outlined),
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          await FirestoreService()
+                                              .removeCart(cart.cartId!);
+                                        },
+                                        child: const Icon(
+                                          Icons.cancel_outlined,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -166,71 +201,91 @@ class CartScreen extends ConsumerWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height / 5.5,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 60,
-                      child: ReusableCard(
-                        child: Row(
+                child: cartValue.when(
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (error, _) => Center(child: Text(error.toString())),
+                    data: (data) {
+                      final itemLen = data.docs.isEmpty ? data.docs.length : 0;
+                      final carts = data.docs.elementAt(itemLen).data();
+
+                      final totalPrice = carts.quantity! * carts.price!;
+
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height / 5.5,
+                        child: Column(
                           children: [
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.4,
-                              child: const TextField(
-                                textAlign: TextAlign.start,
-                                decoration: InputDecoration(
-                                  hintText: 'Enter Your promo code',
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
+                              height: 60,
+                              child: ReusableCard(
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.4,
+                                      child: const TextField(
+                                        textAlign: TextAlign.start,
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Your promo code',
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 4),
+                                    SizedBox(
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width /
+                                          6.6,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: ConstColors.black2),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: ConstColors.black3,
+                                        ),
+                                        width: 20,
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: const Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            color: ConstColors.white,
+                                            size: 22,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 4),
+                            const SizedBox(height: 6),
                             SizedBox(
+                              width: MediaQuery.of(context).size.width / 1,
                               height: 50,
-                              width: MediaQuery.of(context).size.width / 6.6,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: ConstColors.black2),
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ConstColors.black3,
-                                ),
-                                width: 20,
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: const Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: ConstColors.white,
-                                    size: 22,
-                                  ),
+                              child: ReusableCard(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Total:',
+                                      style: MyTextStyle.textStyle2,
+                                    ),
+                                    Text(
+                                      '\$ $totalPrice',
+                                      style: MyTextStyle.textStyle3b,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 4),
                           ],
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 1,
-                      height: 50,
-                      child: ReusableCard(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Total:', style: MyTextStyle.textStyle2),
-                            Text(
-                              '\$67',
-                              style: MyTextStyle.textStyle3.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                  ],
-                ),
+                      );
+                    }),
               ),
             ],
           ),

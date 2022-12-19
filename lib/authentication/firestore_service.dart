@@ -55,30 +55,30 @@ class FirestoreService {
         .set(user.toMap());
   }
 
-  Future<void> addToCart(Cart cart) async {
+  Future<void> addToCart(Cart cart, String cartId) async {
     return await _firestore
         .collection(usersCollection)
         .doc(authService.userId)
         .collection(cartCollection)
-        .doc()
+        .doc(cartId)
         .set(cart.toMap());
   }
 
-  Future<void> removeCart(String id) async {
+  Future<void> removeCart(String cartId) async {
     return await _firestore
         .collection(usersCollection)
         .doc(authService.userId)
         .collection(cartCollection)
-        .doc(id)
+        .doc(cartId)
         .delete();
   }
 
-  Future<void> updateCart(Cart cart, String id) async {
+  Future<void> updateCart(Cart cart, String cartId) async {
     return await _firestore
         .collection(usersCollection)
         .doc(authService.userId)
         .collection(cartCollection)
-        .doc(id)
+        .doc(cartId)
         .update(cart.toMap());
   }
 }

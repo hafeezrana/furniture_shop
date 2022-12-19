@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 
 class ResuableButton extends StatelessWidget {
-  ResuableButton({super.key, required this.buttonText, required this.onTap});
+  const ResuableButton({
+    super.key,
+    this.buttonText,
+    this.textColor,
+    this.onTap,
+  });
 
-  String? buttonText;
+  final String? buttonText;
+  final Color? textColor;
+  final VoidCallback? onTap;
 
-  Color? textColor;
-  void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,10 +25,12 @@ class ResuableButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.5,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: ConstColors.black,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            elevation: 14),
+          backgroundColor: ConstColors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 14,
+        ),
         onPressed: onTap,
         child: Text(
           buttonText!,
