@@ -140,12 +140,14 @@ class CartScreen extends ConsumerWidget {
                                             color: ConstColors.white2,
                                           ),
                                           child: InkWell(
-                                            onTap: () {
+                                            onTap: () async {
                                               quantityProvider.increment();
-                                              FirestoreService().updateCart(
+                                              await FirestoreService()
+                                                  .updateCart(
                                                 Cart(
-                                                    quantity: quantityProvider
-                                                        .quantity),
+                                                  quantity:
+                                                      quantityProvider.quantity,
+                                                ),
                                                 cart.cartId!,
                                               );
                                             },
@@ -202,90 +204,90 @@ class CartScreen extends ConsumerWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 5.5,
                 child: cartValue.when(
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (error, _) => Center(child: Text(error.toString())),
-                    data: (data) {
-                      final itemLen = data.docs.isEmpty ? data.docs.length : 0;
-                      final carts = data.docs.elementAt(itemLen).data();
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (error, _) => Center(child: Text(error.toString())),
+                  data: (data) {
+                    final itemLen = data.docs.isEmpty ? data.docs.length : 0;
+                    final carts = data.docs.elementAt(itemLen).data();
 
-                      final totalPrice = carts.quantity! * carts.price!;
+                    final totalPrice = carts.quantity! * carts.price!;
 
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height / 5.5,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 60,
-                              child: ReusableCard(
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.4,
-                                      child: const TextField(
-                                        textAlign: TextAlign.start,
-                                        decoration: InputDecoration(
-                                          hintText: 'Enter Your promo code',
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 5.5,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 60,
+                            child: ReusableCard(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.4,
+                                    child: const TextField(
+                                      textAlign: TextAlign.start,
+                                      decoration: InputDecoration(
+                                        hintText: 'Enter Your promo code',
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  SizedBox(
+                                    height: 50,
+                                    width:
+                                        MediaQuery.of(context).size.width / 6.6,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: ConstColors.black2),
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: ConstColors.black3,
+                                      ),
+                                      width: 20,
+                                      child: InkWell(
+                                        onTap: () {},
+                                        child: const Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          color: ConstColors.white,
+                                          size: 22,
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 4),
-                                    SizedBox(
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width /
-                                          6.6,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: ConstColors.black2),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: ConstColors.black3,
-                                        ),
-                                        width: 20,
-                                        child: InkWell(
-                                          onTap: () {},
-                                          child: const Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: ConstColors.white,
-                                            size: 22,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 6),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1,
-                              height: 50,
-                              child: ReusableCard(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      'Total:',
-                                      style: MyTextStyle.textStyle2,
-                                    ),
-                                    Text(
-                                      '\$ $totalPrice',
-                                      style: MyTextStyle.textStyle3b,
-                                    ),
-                                  ],
-                                ),
+                          ),
+                          const SizedBox(height: 6),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 1,
+                            height: 50,
+                            child: ReusableCard(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Total:',
+                                    style: MyTextStyle.textStyle2,
+                                  ),
+                                  Text(
+                                    '\$ $totalPrice',
+                                    style: MyTextStyle.textStyle3b,
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 4),
-                          ],
-                        ),
-                      );
-                    }),
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

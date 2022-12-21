@@ -18,10 +18,15 @@ final cartStreamProvider = StreamProvider<QuerySnapshot<Cart>>((ref) {
   return ref.watch(firestoreProvider).watchcart();
 });
 
+final favoritesStreamProvider = StreamProvider<QuerySnapshot<Product>>((ref) {
+  return ref.watch(firestoreProvider).watchFavorites();
+});
+
 class FirestoreService {
   static const String usersCollection = 'users';
   static const String cartCollection = 'cart';
   static const String productsCollection = 'products';
+  static const String favoritesCollection = 'favorites';
 
   final _firestore = FirebaseFirestore.instance;
   final authService = AuthService();
@@ -46,6 +51,26 @@ class FirestoreService {
           toFirestore: (model, _) => model.toMap(),
         )
         .snapshots();
+  }
+
+  Stream<QuerySnapshot<Product>> watchFavorites() {
+    return _firestore
+        // .collection(usersCollection)
+        // .doc(authService.userId)
+        .collection(productsCollection)
+        .withConverter<Product>(
+          fromFirestore: (snapshot, _) => Product.fromMap(snapshot.data()!),
+          toFirestore: (model, _) => model.toMap(),
+        )
+        .where('isFavorite', isEqualTo: true)
+        .snapshots();
+  }
+
+  Future<void> updatefavorite(Product product) {
+    return _firestore
+        .collection(productsCollection)
+        .doc(product.id)
+        .update(product.toMap());
   }
 
   Future<void> addUser(User user) async {

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Product {
-  const Product({
+  Product({
     required this.id,
     required this.title,
     this.description,
@@ -19,7 +19,7 @@ class Product {
   final String id;
   final String title;
   final String? description;
-  final bool? isFavorite;
+  bool? isFavorite;
   final String imageUrl;
   final List<String>? color;
   final int quantity;

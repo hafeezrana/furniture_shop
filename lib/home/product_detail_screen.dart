@@ -29,8 +29,6 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
-  bool isFavorite = false;
-
   @override
   void initState() {
     super.initState();
@@ -259,10 +257,20 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             ),
             alignment: Alignment.center,
             child: IconButton(
-              onPressed: () {
+              onPressed: () async {
                 setState(() {
-                  widget.product.copyWith(isFavorite: !isFavorite);
+                  widget.product.isFavorite = !widget.product.isFavorite!;
                 });
+                await FirestoreService().updatefavorite(
+                  Product(
+                    id: widget.product.id,
+                    title: widget.product.title,
+                    imageUrl: widget.product.imageUrl,
+                    quantity: widget.product.quantity,
+                    price: widget.product.price,
+                    isFavorite: widget.product.isFavorite,
+                  ),
+                );
               },
               icon: Icon(
                 widget.product.isFavorite!
