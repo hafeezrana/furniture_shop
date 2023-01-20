@@ -89,15 +89,6 @@ class FirestoreService {
         .set(cart.toMap());
   }
 
-  Future<void> removeCart(String cartId) async {
-    return await _firestore
-        .collection(usersCollection)
-        .doc(authService.userId)
-        .collection(cartCollection)
-        .doc(cartId)
-        .delete();
-  }
-
   Future<void> updateCart(Cart cart, String cartId) async {
     return await _firestore
         .collection(usersCollection)
@@ -105,5 +96,14 @@ class FirestoreService {
         .collection(cartCollection)
         .doc(cartId)
         .update(cart.toMap());
+  }
+
+  Future<void> removeCart(String cartId) async {
+    return await _firestore
+        .collection(usersCollection)
+        .doc(authService.userId)
+        .collection(cartCollection)
+        .doc(cartId)
+        .delete();
   }
 }

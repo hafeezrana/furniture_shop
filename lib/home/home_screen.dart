@@ -99,10 +99,15 @@ class HomeScreen extends ConsumerWidget {
                                   price: product.price,
                                   total: product.price,
                                 );
+                                // if (product.id == product.id) {
+                                //   await FirestoreService()
+                                //       .updateCart(newCart, cartId);
+                                // } else {
 
                                 await FirestoreService()
                                     .addToCart(newCart, cartId);
                                 Navigator.pushNamed(context, CartScreen.route);
+                                // }
                               },
                             ),
                           ),

@@ -213,6 +213,12 @@ class CartScreen extends ConsumerWidget {
 
                     final totalPrice = carts.quantity! * carts.price!;
 
+                    var totala = 0.0;
+
+                    for (int i = 0; i <= carts.cartId!.length; i++) {
+                      totala += totalPrice;
+                    }
+
                     return SizedBox(
                       height: MediaQuery.of(context).size.height / 5.5,
                       child: Column(
@@ -275,7 +281,8 @@ class CartScreen extends ConsumerWidget {
                                     style: MyTextStyle.textStyle2,
                                   ),
                                   Text(
-                                    '\$ $totalPrice',
+                                    // '\$ $totalPrice',
+                                    '\$ $totala',
                                     style: MyTextStyle.textStyle3b,
                                   ),
                                 ],

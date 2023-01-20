@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/bottom_navbar.dart';
 import 'package:furniture_shop/routes.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'authentication/auth_service.dart';
 import 'authentication/signin/signIn_screen.dart';
@@ -29,14 +30,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Furniture Shop',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return OverlaySupport(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Furniture Shop',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: AuthStateChanges.route,
       ),
-      onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: AuthStateChanges.route,
     );
   }
 }
