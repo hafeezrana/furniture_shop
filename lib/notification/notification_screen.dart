@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/model/notification.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:http/http.dart' as http;
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -78,6 +82,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
   }
 
+  Future<void> sendNotification() async {
+    try {
+      final body = {
+        "to":
+            "cal-pf9vSPaQDPUyPMAEld:APA91bEz8pgn49fS-p-robZE2vz993z7_qZ1pqudxwqqKrWN9I25gBjOakZxV8FpBthl7NF1eFOpS4UdpcmYArBnmWUvdmn9dm0lsgguFbcnbFBVRB8RByipRhj0YkzJRC6c08MpCglM",
+        "notification": {
+          "title": "Mr. Hafeez",
+          "body": "Flutter Dcotor Developer"
+        }
+      };
+      final response = await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader:
+              'key=AAAAARgfX3k:APA91bGhgQmD0eiN_5ZazLHQpcNg1js9MXII4gkvfOlgmyD8ZzrloxY3_X8Q_MmtPUCYdadcSYn21k6D25u0by1LyD0ZHZZi8dK_BM3_YRgpBDI8umTq4eTJFCFC3CvY7lapofz7tGCe',
+        },
+        body: jsonEncode(body),
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   void initState() {
     registerNotification();
@@ -88,6 +116,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+        child: const Text('add'),
+        onPressed: () {
+          sendNotification();
+        },
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
