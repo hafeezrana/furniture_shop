@@ -6,6 +6,7 @@ import 'package:furniture_shop/model/cart.dart';
 
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../utils/constants/colors_consts.dart';
 import '../../utils/widgets/text_style.dart';
@@ -305,7 +306,7 @@ class CartScreen extends ConsumerWidget {
         child: ResuableButton(
           buttonText: 'Check Out',
           onTap: () {
-            Navigator.pushNamed(context, CheckOutScreen.route);
+            context.go(CheckOutScreen.route);
           },
         ),
       ),

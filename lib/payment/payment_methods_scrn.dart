@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 import 'add_payment_screen.dart';
 
@@ -84,7 +85,7 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, AddPaymentMethodScrn.route);
+            context.go(AddPaymentMethodScrn.route);
           },
           child: const Icon(Icons.add)),
     );

@@ -4,6 +4,7 @@ import 'package:furniture_shop/model/product.dart';
 import 'package:furniture_shop/payment/payment_methods_scrn.dart';
 import 'package:furniture_shop/profile/my_profile_screen.dart';
 import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
+import 'package:go_router/go_router.dart';
 
 import 'address/add_address_scrn.dart';
 import 'address/shipping_addresses.dart';
@@ -18,10 +19,138 @@ import 'home/home_screen.dart';
 import 'home/product_detail_screen.dart';
 import 'myorders/order_screen.dart';
 import 'notification/notification_screen.dart';
-import 'payment/add_payment_screen.dart';
 import 'reviews/my_reviews_screen.dart';
 import 'setting/setting_screen.dart';
 
+class MyRouter {
+  final _rootNavKey = GlobalKey<NavigatorState>();
+  final _shellNavKey = GlobalKey<NavigatorState>();
+
+  late final router = GoRouter(
+    navigatorKey: _rootNavKey,
+    initialLocation: AuthStateChanges.route,
+    errorBuilder: (context, state) {
+      return const Center(
+        child: Text('Unkown Navigation Occurred!'),
+      );
+    },
+    routes: [
+      GoRoute(
+        path: AuthStateChanges.route,
+        builder: (context, state) => AuthStateChanges(),
+      ),
+      ShellRoute(
+        navigatorKey: _shellNavKey,
+        builder: (context, state, child) {
+          return const BottomNavBarScreen();
+        },
+        routes: [
+          GoRoute(
+            path: HomeScreen.route,
+            builder: (context, state) => const HomeScreen(),
+            routes: [
+              GoRoute(
+                path: ProductDetailScreen.route,
+                builder: (context, state) {
+                  final product = state.extra as Product;
+                  return ProductDetailScreen(product: product);
+                },
+                routes: [
+                  GoRoute(
+                    path: ReviewsAndRatingScreen.route,
+                    builder: (context, state) => const ReviewsAndRatingScreen(),
+                  ),
+                  GoRoute(
+                    path: CartScreen.route,
+                    builder: (context, state) => const CartScreen(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: CheckOutScreen.route,
+                builder: (context, state) => const CheckOutScreen(),
+              ),
+              GoRoute(
+                path: OrderNoteScreen.route,
+                builder: (context, state) => const OrderNoteScreen(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: MyProfilesScreen.route,
+            builder: (context, state) => const MyProfilesScreen(),
+            routes: [
+              GoRoute(
+                path: OrderScreen.route,
+                builder: (context, state) => const OrderScreen(),
+              ),
+              GoRoute(
+                path: MyReviewScreen.route,
+                builder: (context, state) => const MyReviewScreen(),
+              ),
+              GoRoute(
+                path: ShippingAddressScreen.route,
+                builder: (context, state) => const ShippingAddressScreen(),
+              ),
+              GoRoute(
+                path: AddAdressScreen.route,
+                builder: (context, state) => const AddAdressScreen(),
+              ),
+              GoRoute(
+                path: PaymentMethodscrn.route,
+                builder: (context, state) => const PaymentMethodscrn(),
+              ),
+              GoRoute(
+                path: AddAdressScreen.route,
+                builder: (context, state) => const AddAdressScreen(),
+              ),
+              GoRoute(
+                path: SettingScreen.route,
+                builder: (context, state) => const SettingScreen(),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: FavoriteScreen.route,
+            builder: (context, state) => const FavoriteScreen(),
+          ),
+          GoRoute(
+            path: NotificationScreen.route,
+            builder: (context, state) => const NotificationScreen(),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: BottomNavBarScreen.route,
+        builder: (context, state) => const BottomNavBarScreen(),
+      ),
+      GoRoute(
+        path: SignInScreen.route,
+        builder: (context, state) => const SignInScreen(),
+      ),
+      GoRoute(
+        path: SignUpScreen.route,
+        builder: (context, state) => const SignUpScreen(),
+      ),
+    ],
+  );
+
+  static Route<void> route(Widget? child) {
+    return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 600),
+      pageBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+
+/*
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -114,10 +243,8 @@ class RouteGenerator {
   static Route<dynamic> error() {
     return MaterialPageRoute(
       builder: (context) {
-        return Container(
-          child: const Center(child: Text('Something Went Wrong')),
-        );
+        return const Center(child: Text('Something Went Wrong'));
       },
     );
   }
-}
+} */

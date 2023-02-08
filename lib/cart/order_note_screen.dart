@@ -43,7 +43,8 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                   ResuableButton(
                     buttonText: 'Track Your Order',
                     onTap: () {
-                      Navigator.pushNamed(context, OrderScreen.route);
+                      Navigator.pushReplacementNamed(
+                          context, OrderScreen.route);
                     },
                   ),
                   const SizedBox(height: 10),
@@ -67,7 +68,10 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                         //     return const HomeScreen();
                         //   },
                         // ));
-                        Navigator.pushNamed(context, HomeScreen.route);
+                        Navigator.pushReplacementNamed(
+                          context,
+                          HomeScreen.route,
+                        );
                       },
                       child: Text('Back to Home',
                           style: MyTextStyle.textStyle3

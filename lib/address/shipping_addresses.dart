@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/widgets/reusable_card.dart';
 import '../../../utils/widgets/text_style.dart';
@@ -81,7 +82,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, AddAdressScreen.route);
+            context.go(AddAdressScreen.route);
           },
           child: const Icon(Icons.add)),
     );

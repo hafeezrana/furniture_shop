@@ -31,14 +31,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OverlaySupport(
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: MyRouter().router,
         debugShowCheckedModeBanner: false,
         title: 'Furniture Shop',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        onGenerateRoute: RouteGenerator.generateRoute,
-        initialRoute: AuthStateChanges.route,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 import 'order_note_screen.dart';
 
@@ -167,7 +168,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         child: ResuableButton(
           buttonText: 'SUBMIT ORDER',
           onTap: () {
-            Navigator.pushNamed(context, OrderNoteScreen.route);
+            context.go(OrderNoteScreen.route);
           },
         ),
       ),

@@ -6,6 +6,7 @@ import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/reusbale_textformf.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 import '../signup/signUp_screen.dart';
 
@@ -116,10 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             email: emailController.text,
                             password: passwordController.text,
                           );
-                          Navigator.pushNamed(
-                            context,
-                            AuthStateChanges.route,
-                          );
+                          context.go(AuthStateChanges.route);
                         },
                       ),
                       const SizedBox(height: 10),
@@ -130,7 +128,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               .copyWith(color: ConstColors.black),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, SignUpScreen.route);
+                          context.go(SignUpScreen.route);
                         },
                       ),
                       const SizedBox(height: 10),

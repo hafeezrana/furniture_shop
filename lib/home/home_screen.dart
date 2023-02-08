@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/home/category_item_list.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../utils/widgets/home_widgets.dart';
@@ -77,10 +78,9 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushNamed(
-                                context,
+                              context.go(
                                 ProductDetailScreen.route,
-                                arguments: product,
+                                extra: product,
                               );
                             },
                             child: ReusableProduct(
@@ -106,7 +106,8 @@ class HomeScreen extends ConsumerWidget {
 
                                 await FirestoreService()
                                     .addToCart(newCart, cartId);
-                                Navigator.pushNamed(context, CartScreen.route);
+                                context.go(CartScreen.route);
+
                                 // }
                               },
                             ),

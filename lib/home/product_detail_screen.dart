@@ -4,6 +4,7 @@ import 'package:furniture_shop/cart/cart_notifier.dart';
 
 import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../utils/constants/colors_consts.dart';
@@ -220,8 +221,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, ReviewsAndRatingScreen.route);
+                        context.go(ReviewsAndRatingScreen.route);
                       },
                       child: const Text(
                         '(20 Reviews)',
@@ -297,7 +297,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
               await FirestoreService().addToCart(newCart, cartId);
 
-              Navigator.pushNamed(context, CartScreen.route);
+              context.go(CartScreen.route);
             },
           )
         ],

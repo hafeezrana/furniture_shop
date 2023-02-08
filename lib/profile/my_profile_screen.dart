@@ -5,6 +5,7 @@ import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/reusable_card.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 
 import '../address/shipping_addresses.dart';
 import '../myorders/order_screen.dart';
@@ -42,7 +43,8 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                   IconButton(
                     onPressed: () async {
                       await AuthService().signOut();
-                      Navigator.pushNamed(context, AuthStateChanges.route);
+
+                      context.go(AuthStateChanges.route);
                     },
                     icon: const Icon(Icons.logout, color: ConstColors.black2),
                   )
@@ -79,35 +81,35 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'My Orders',
                 text2: 'Already have 10 orders',
                 onTap: () {
-                  Navigator.pushNamed(context, OrderScreen.route);
+                  context.go(OrderScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Shipping Adresses',
                 text2: '03 addresses',
                 onTap: () {
-                  Navigator.pushNamed(context, ShippingAddressScreen.route);
+                  context.go(ShippingAddressScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Payment Methods',
                 text2: 'You have 2 cards',
                 onTap: () {
-                  Navigator.pushNamed(context, PaymentMethodscrn.route);
+                  context.go(PaymentMethodscrn.route);
                 },
               ),
               MyProfileCard(
                 text1: 'My Reviews',
                 text2: 'Review for 3 items',
                 onTap: () {
-                  Navigator.pushNamed(context, MyReviewScreen.route);
+                  context.go(MyReviewScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Setting',
                 text2: 'Notification, Password, FAQ, Contacts',
                 onTap: () {
-                  Navigator.pushNamed(context, SettingScreen.route);
+                  context.go(SettingScreen.route);
                 },
               ),
             ],

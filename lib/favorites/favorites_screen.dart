@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:furniture_shop/authentication/firestore_service.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../utils/constants/colors_consts.dart';
@@ -142,10 +143,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
 
                                           await FirestoreService()
                                               .addToCart(newCart, cartId);
-                                          Navigator.pushNamed(
-                                            context,
-                                            CartScreen.route,
-                                          );
+                                          context.go(CartScreen.route);
                                         },
                                         child: const Icon(
                                           Icons.shopping_bag_outlined,
@@ -172,7 +170,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
         child: ResuableButton(
           buttonText: 'Add all To My Cart',
           onTap: () {
-            Navigator.pushNamed(context, CartScreen.route);
+            context.go(CartScreen.route);
           },
         ),
       ),

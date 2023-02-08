@@ -18,101 +18,110 @@ class OrderScreen extends StatelessWidget {
     ];
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios, color: ConstColors.black)),
-          backgroundColor: Colors.white,
-          title: Align(
-            alignment: Alignment.center,
-            child: Text('My Orders',
+              icon: const Icon(Icons.arrow_back_ios, color: ConstColors.black),
+            ),
+            backgroundColor: Colors.white,
+            title: Align(
+              alignment: Alignment.center,
+              child: Text(
+                'My Orders',
                 style:
-                    MyTextStyle.textStyle3b.copyWith(color: ConstColors.black)),
+                    MyTextStyle.textStyle3b.copyWith(color: ConstColors.black),
+              ),
+            ),
+            actions: [Container()],
+            elevation: 0,
+            bottom: TabBar(
+              indicatorColor: ConstColors.black,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorWeight: 4,
+              indicatorPadding: const EdgeInsets.all(10),
+              tabs: [
+                SizedBox(
+                  height: 40,
+                  child: Text('Delivered',
+                      style: MyTextStyle.textStyle2
+                          .copyWith(color: ConstColors.black)),
+                ),
+                SizedBox(
+                  height: 40,
+                  child: Text('Processing',
+                      style: MyTextStyle.textStyle2
+                          .copyWith(color: ConstColors.black)),
+                ),
+                SizedBox(
+                  height: 40,
+                  child: Text('Canceled',
+                      style: MyTextStyle.textStyle2
+                          .copyWith(color: ConstColors.black)),
+                ),
+              ],
+            ),
           ),
-          actions: [Container()],
-          elevation: 0,
-          bottom: TabBar(
-            indicatorColor: ConstColors.black,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 4,
-            indicatorPadding: const EdgeInsets.all(10),
-            tabs: [
-              SizedBox(
-                height: 40,
-                child: Text('Delivered',
-                    style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black)),
-              ),
-              SizedBox(
-                height: 40,
-                child: Text('Processing',
-                    style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black)),
-              ),
-              SizedBox(
-                height: 40,
-                child: Text('Canceled',
-                    style: MyTextStyle.textStyle2
-                        .copyWith(color: ConstColors.black)),
-              ),
-            ],
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Center(
-            child: TabBarView(
-              children: tabs
-                  .map(
-                    (e) => Center(
-                        child: SizedBox(
-                      height: 140,
-                      child: ReusableCard(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Order No238427',
-                                    style: MyTextStyle.textStyle2b),
-                                Text('03/12/2022',
-                                    style: MyTextStyle.textStyle2),
-                              ],
-                            ),
-                            const Divider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text('Quantity: 02',
-                                    style: MyTextStyle.textStyle2),
-                                Text('Total amout: \$ 200',
-                                    style: MyTextStyle.textStyle2)
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text('Detail',
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Center(
+              child: TabBarView(
+                children: tabs
+                    .map(
+                      (e) => Center(
+                          child: SizedBox(
+                        height: 140,
+                        child: ReusableCard(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('Order No238427',
+                                      style: MyTextStyle.textStyle2b),
+                                  Text('03/12/2022',
+                                      style: MyTextStyle.textStyle2),
+                                ],
+                              ),
+                              const Divider(),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text('Quantity: 02',
+                                      style: MyTextStyle.textStyle2),
+                                  Text('Total amout: \$ 200',
+                                      style: MyTextStyle.textStyle2)
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text('Detail',
+                                        style: MyTextStyle.textStyle2b.copyWith(
+                                            color: ConstColors.black)),
+                                  ),
+                                  Text(e,
                                       style: MyTextStyle.textStyle2b
-                                          .copyWith(color: ConstColors.black)),
-                                ),
-                                Text(e,
-                                    style: MyTextStyle.textStyle2b
-                                        .copyWith(color: Colors.green)),
-                              ],
-                            ),
-                          ],
+                                          .copyWith(color: Colors.green)),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )),
-                  )
-                  .toList(),
+                      )),
+                    )
+                    .toList(),
+              ),
             ),
           ),
         ),
