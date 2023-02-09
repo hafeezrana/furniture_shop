@@ -143,7 +143,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
 
                                           await FirestoreService()
                                               .addToCart(newCart, cartId);
-                                          context.go(CartScreen.route);
+                                          context.push(CartScreen.route);
                                         },
                                         child: const Icon(
                                           Icons.shopping_bag_outlined,
@@ -170,7 +170,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
         child: ResuableButton(
           buttonText: 'Add all To My Cart',
           onTap: () {
-            context.go(CartScreen.route);
+            context.push(CartScreen.route);
           },
         ),
       ),

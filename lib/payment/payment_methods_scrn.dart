@@ -30,19 +30,21 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios),
+                  ),
                   const Text('Payment Methods', style: MyTextStyle.textStyle3b),
                   const SizedBox(width: 10)
                 ],
               ),
               const SizedBox(height: 20),
               SizedBox(
-                  height: 160,
-                  width: 400,
-                  child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill)),
+                height: 160,
+                width: 400,
+                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
+              ),
               SizedBox(
                 height: 60,
                 child: Row(
@@ -54,15 +56,18 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
                         isChanged = value!;
                       },
                     ),
-                    const Text('Use as default payment method',
-                        style: MyTextStyle.textStyle1),
+                    const Text(
+                      'Use as default payment method',
+                      style: MyTextStyle.textStyle1,
+                    ),
                   ],
                 ),
               ),
               SizedBox(
-                  height: 160,
-                  width: 380,
-                  child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill)),
+                height: 160,
+                width: 380,
+                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
+              ),
               SizedBox(
                 height: 60,
                 child: Row(
@@ -85,7 +90,7 @@ class _PaymentMethodscrnState extends State<PaymentMethodscrn> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.go(AddPaymentMethodScrn.route);
+            context.push(AddPaymentMethodScrn.route);
           },
           child: const Icon(Icons.add)),
     );

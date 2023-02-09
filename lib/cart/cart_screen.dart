@@ -306,7 +306,7 @@ class CartScreen extends ConsumerWidget {
         child: ResuableButton(
           buttonText: 'Check Out',
           onTap: () {
-            context.go(CheckOutScreen.route);
+            context.push(CheckOutScreen.route);
           },
         ),
       ),

@@ -19,7 +19,7 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
     Key? key,
     required this.product,
   }) : super(key: key);
-
+//
   static const route = '/productScreen';
 
   final Product product;
@@ -221,7 +221,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        context.go(ReviewsAndRatingScreen.route);
+                        context.push(ReviewsAndRatingScreen.route);
                       },
                       child: const Text(
                         '(20 Reviews)',
@@ -297,7 +297,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
               await FirestoreService().addToCart(newCart, cartId);
 
-              context.go(CartScreen.route);
+              context.push(CartScreen.route);
             },
           )
         ],

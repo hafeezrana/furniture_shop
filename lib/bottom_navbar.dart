@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+
 import '../utils/constants/colors_consts.dart';
 import 'favorites/favorites_screen.dart';
 import 'home/home_screen.dart';
@@ -7,9 +8,13 @@ import 'notification/notification_screen.dart';
 import 'profile/my_profile_screen.dart';
 
 class BottomNavBarScreen extends StatefulWidget {
-  const BottomNavBarScreen({super.key});
+  const BottomNavBarScreen({
+    Key? key,
+    this.child,
+  }) : super(key: key);
 
   static const route = '/bottomNavScrn';
+  final Widget? child;
 
   @override
   State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
@@ -24,7 +29,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
       const HomeScreen(),
       const FavoriteScreen(),
       const NotificationScreen(),
-      const MyProfilesScreen(),
+      const MyProfileScreen(),
     ];
   }
 

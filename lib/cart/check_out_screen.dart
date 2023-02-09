@@ -168,7 +168,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         child: ResuableButton(
           buttonText: 'SUBMIT ORDER',
           onTap: () {
-            context.go(OrderNoteScreen.route);
+            context.push(OrderNoteScreen.route);
           },
         ),
       ),

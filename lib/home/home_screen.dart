@@ -78,7 +78,7 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           child: InkWell(
                             onTap: () {
-                              context.go(
+                              context.push(
                                 ProductDetailScreen.route,
                                 extra: product,
                               );
@@ -106,7 +106,7 @@ class HomeScreen extends ConsumerWidget {
 
                                 await FirestoreService()
                                     .addToCart(newCart, cartId);
-                                context.go(CartScreen.route);
+                                context.push(CartScreen.route);
 
                                 // }
                               },

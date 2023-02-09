@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/main.dart';
 import 'package:furniture_shop/model/product.dart';
+import 'package:furniture_shop/payment/add_payment_screen.dart';
 import 'package:furniture_shop/payment/payment_methods_scrn.dart';
 import 'package:furniture_shop/profile/my_profile_screen.dart';
 import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
@@ -36,94 +37,94 @@ class MyRouter {
     },
     routes: [
       GoRoute(
+        path: BottomNavBarScreen.route,
+        builder: (context, state) {
+          return const BottomNavBarScreen();
+        },
+      ),
+      // ShellRoute(
+      //   navigatorKey: _shellNavKey,
+      //   builder: (context, state, child) {
+      //     return BottomNavBarScreen(child: child);
+      //   },
+      //   routes: [
+      GoRoute(
+        path: HomeScreen.route,
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: ReviewsAndRatingScreen.route,
+        builder: (context, state) => const ReviewsAndRatingScreen(),
+      ),
+      GoRoute(
+        path: CartScreen.route,
+        builder: (context, state) => const CartScreen(),
+      ),
+      GoRoute(
+        path: CheckOutScreen.route,
+        builder: (context, state) => const CheckOutScreen(),
+      ),
+      GoRoute(
+        path: OrderNoteScreen.route,
+        builder: (context, state) => const OrderNoteScreen(),
+      ),
+      GoRoute(
+        path: ProductDetailScreen.route,
+        builder: (context, state) {
+          final product = state.extra as Product;
+          return ProductDetailScreen(product: product);
+        },
+      ),
+      GoRoute(
+        path: MyProfileScreen.route,
+        builder: (context, state) => const MyProfileScreen(),
+      ),
+      GoRoute(
+        path: OrderScreen.route,
+        builder: (context, state) => const OrderScreen(),
+      ),
+      GoRoute(
+        path: MyReviewScreen.route,
+        builder: (context, state) => const MyReviewScreen(),
+      ),
+      GoRoute(
+        path: ShippingAddressScreen.route,
+        builder: (context, state) => const ShippingAddressScreen(),
+      ),
+      GoRoute(
+        path: AddAdressScreen.route,
+        builder: (context, state) => const AddAdressScreen(),
+      ),
+      GoRoute(
+        path: PaymentMethodscrn.route,
+        builder: (context, state) => const PaymentMethodscrn(),
+      ),
+      GoRoute(
+        path: AddPaymentMethodScrn.route,
+        builder: (context, state) => const AddPaymentMethodScrn(),
+      ),
+      GoRoute(
+        path: AddAdressScreen.route,
+        builder: (context, state) => const AddAdressScreen(),
+      ),
+      GoRoute(
+        path: SettingScreen.route,
+        builder: (context, state) => const SettingScreen(),
+      ),
+      GoRoute(
         path: AuthStateChanges.route,
         builder: (context, state) => AuthStateChanges(),
       ),
-      ShellRoute(
-        navigatorKey: _shellNavKey,
-        builder: (context, state, child) {
-          return const BottomNavBarScreen();
-        },
-        routes: [
-          GoRoute(
-            path: HomeScreen.route,
-            builder: (context, state) => const HomeScreen(),
-            routes: [
-              GoRoute(
-                path: ProductDetailScreen.route,
-                builder: (context, state) {
-                  final product = state.extra as Product;
-                  return ProductDetailScreen(product: product);
-                },
-                routes: [
-                  GoRoute(
-                    path: ReviewsAndRatingScreen.route,
-                    builder: (context, state) => const ReviewsAndRatingScreen(),
-                  ),
-                  GoRoute(
-                    path: CartScreen.route,
-                    builder: (context, state) => const CartScreen(),
-                  ),
-                ],
-              ),
-              GoRoute(
-                path: CheckOutScreen.route,
-                builder: (context, state) => const CheckOutScreen(),
-              ),
-              GoRoute(
-                path: OrderNoteScreen.route,
-                builder: (context, state) => const OrderNoteScreen(),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: MyProfilesScreen.route,
-            builder: (context, state) => const MyProfilesScreen(),
-            routes: [
-              GoRoute(
-                path: OrderScreen.route,
-                builder: (context, state) => const OrderScreen(),
-              ),
-              GoRoute(
-                path: MyReviewScreen.route,
-                builder: (context, state) => const MyReviewScreen(),
-              ),
-              GoRoute(
-                path: ShippingAddressScreen.route,
-                builder: (context, state) => const ShippingAddressScreen(),
-              ),
-              GoRoute(
-                path: AddAdressScreen.route,
-                builder: (context, state) => const AddAdressScreen(),
-              ),
-              GoRoute(
-                path: PaymentMethodscrn.route,
-                builder: (context, state) => const PaymentMethodscrn(),
-              ),
-              GoRoute(
-                path: AddAdressScreen.route,
-                builder: (context, state) => const AddAdressScreen(),
-              ),
-              GoRoute(
-                path: SettingScreen.route,
-                builder: (context, state) => const SettingScreen(),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: FavoriteScreen.route,
-            builder: (context, state) => const FavoriteScreen(),
-          ),
-          GoRoute(
-            path: NotificationScreen.route,
-            builder: (context, state) => const NotificationScreen(),
-          ),
-        ],
+      GoRoute(
+        path: FavoriteScreen.route,
+        builder: (context, state) => const FavoriteScreen(),
       ),
       GoRoute(
-        path: BottomNavBarScreen.route,
-        builder: (context, state) => const BottomNavBarScreen(),
+        path: NotificationScreen.route,
+        builder: (context, state) => const NotificationScreen(),
       ),
+      //   ],
+      // ),
       GoRoute(
         path: SignInScreen.route,
         builder: (context, state) => const SignInScreen(),
@@ -247,4 +248,5 @@ class RouteGenerator {
       },
     );
   }
-} */
+}
+*/

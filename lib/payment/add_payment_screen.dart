@@ -38,9 +38,10 @@ class _AddPaymentMethodScrnState extends State<AddPaymentMethodScrn> {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                  height: 160,
-                  width: 400,
-                  child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill)),
+                height: 160,
+                width: 400,
+                child: Image.network(ConstsImages.visaImg, fit: BoxFit.fill),
+              ),
               PaymentContainer('Full Name', 'Ex: Rizwan Javed'),
               PaymentContainer('Card Number', '**** **** **** 1242'),
               SizedBox(
@@ -49,14 +50,15 @@ class _AddPaymentMethodScrnState extends State<AddPaymentMethodScrn> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width / 2.5,
-                        child: PaymentContainer('Cvv', 'Ex: 123')),
+                      height: 100,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: PaymentContainer('Cvv', 'Ex: 123'),
+                    ),
                     SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width / 2.5,
-                        child:
-                            PaymentContainer('Expiration Date', '22/12/2022')),
+                      height: 100,
+                      width: MediaQuery.of(context).size.width / 2.5,
+                      child: PaymentContainer('Expiration Date', '22/12/2022'),
+                    ),
                   ],
                 ),
               )
@@ -91,13 +93,15 @@ class _AddPaymentMethodScrnState extends State<AddPaymentMethodScrn> {
             children: [
               Text(title),
               TextField(
-                  textAlign: TextAlign.start,
-                  style: MyTextStyle.textStyle2b,
-                  decoration: InputDecoration(
-                      hintText: subtitle,
-                      hintStyle: MyTextStyle.textStyle1b,
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none)),
+                textAlign: TextAlign.start,
+                style: MyTextStyle.textStyle2b,
+                decoration: InputDecoration(
+                  hintText: subtitle,
+                  hintStyle: MyTextStyle.textStyle1b,
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
+              ),
             ],
           ),
         ),

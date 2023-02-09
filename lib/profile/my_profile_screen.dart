@@ -13,16 +13,16 @@ import '../payment/payment_methods_scrn.dart';
 import '../reviews/my_reviews_screen.dart';
 import '../setting/setting_screen.dart';
 
-class MyProfilesScreen extends StatefulWidget {
-  const MyProfilesScreen({super.key});
+class MyProfileScreen extends StatefulWidget {
+  const MyProfileScreen({super.key});
 
   static const route = '/profileScreen';
 
   @override
-  State<MyProfilesScreen> createState() => _MyProfilesScreenState();
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
 }
 
-class _MyProfilesScreenState extends State<MyProfilesScreen> {
+class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +37,8 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon:
-                          const Icon(Icons.search, color: ConstColors.black2)),
+                      icon: const Icon(Icons.search,
+                          size: 30, color: ConstColors.black2)),
                   const Text('Profile', style: MyTextStyle.textStyle3b),
                   IconButton(
                     onPressed: () async {
@@ -68,9 +68,11 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Hafeez Rana',
-                            style: MyTextStyle.textStyle3
-                                .copyWith(fontWeight: FontWeight.bold)),
+                        Text(
+                          'Hafeez Rana',
+                          style: MyTextStyle.textStyle3
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                         const Text('hafeez@gmail.com'),
                       ],
                     ),
@@ -81,35 +83,35 @@ class _MyProfilesScreenState extends State<MyProfilesScreen> {
                 text1: 'My Orders',
                 text2: 'Already have 10 orders',
                 onTap: () {
-                  context.go(OrderScreen.route);
+                  context.push(OrderScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Shipping Adresses',
                 text2: '03 addresses',
                 onTap: () {
-                  context.go(ShippingAddressScreen.route);
+                  context.push(ShippingAddressScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Payment Methods',
                 text2: 'You have 2 cards',
                 onTap: () {
-                  context.go(PaymentMethodscrn.route);
+                  context.push(PaymentMethodscrn.route);
                 },
               ),
               MyProfileCard(
                 text1: 'My Reviews',
                 text2: 'Review for 3 items',
                 onTap: () {
-                  context.go(MyReviewScreen.route);
+                  context.push(MyReviewScreen.route);
                 },
               ),
               MyProfileCard(
                 text1: 'Setting',
                 text2: 'Notification, Password, FAQ, Contacts',
                 onTap: () {
-                  context.go(SettingScreen.route);
+                  context.push(SettingScreen.route);
                 },
               ),
             ],

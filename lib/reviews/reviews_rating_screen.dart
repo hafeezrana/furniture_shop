@@ -118,8 +118,13 @@ class _ReviewsAndRatingScreenState extends State<ReviewsAndRatingScreen> {
           ),
         ),
       ),
-      bottomNavigationBar:
-          ResuableButton(buttonText: 'Write a Review', onTap: () {}),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: ResuableButton(
+          buttonText: 'Write a Review',
+          onTap: () {},
+        ),
+      ),
     );
   }
 }

@@ -135,7 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .copyWith(color: ConstColors.black),
                         ),
                         onPressed: () {
-                          context.go(SignInScreen.route);
+                          context.pushReplacement(SignInScreen.route);
                         },
                       ),
                       const SizedBox(height: 10),

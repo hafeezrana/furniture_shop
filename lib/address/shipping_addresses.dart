@@ -82,7 +82,7 @@ class _ShippingAddressScreenState extends State<ShippingAddressScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.go(AddAdressScreen.route);
+            context.push(AddAdressScreen.route);
           },
           child: const Icon(Icons.add)),
     );

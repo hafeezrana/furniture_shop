@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:furniture_shop/bottom_navbar.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
+import 'package:go_router/go_router.dart';
 
-import '../home/home_screen.dart';
 import '../myorders/order_screen.dart';
 
 class OrderNoteScreen extends StatefulWidget {
@@ -43,39 +44,35 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                   ResuableButton(
                     buttonText: 'Track Your Order',
                     onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, OrderScreen.route);
+                      context.push(OrderScreen.route);
                     },
                   ),
                   const SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: ConstColors.black2)),
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: ConstColors.black2),
+                    ),
                     height: 50,
                     width: MediaQuery.of(context).size.width / 1.5,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 6),
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        elevation: 6,
+                      ),
                       onPressed: () {
-                        // Navigator.push(
-
-                        //   context, MaterialPageRoute(
-                        //   builder: (context) {
-                        //     return const HomeScreen();
-                        //   },
-                        // ));
-                        Navigator.pushReplacementNamed(
-                          context,
-                          HomeScreen.route,
+                        context.push(
+                          BottomNavBarScreen.route,
                         );
                       },
-                      child: Text('Back to Home',
-                          style: MyTextStyle.textStyle3
-                              .copyWith(color: ConstColors.black)),
+                      child: Text(
+                        'Back to Home',
+                        style: MyTextStyle.textStyle3
+                            .copyWith(color: ConstColors.black),
+                      ),
                     ),
                   ),
                 ],
