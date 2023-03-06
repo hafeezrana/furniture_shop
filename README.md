@@ -1,6 +1,6 @@
 # furniture_shop
 
-A new Flutter project.
+"This project is under development mode"
 
 ## Getting Started
 
