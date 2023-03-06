@@ -6,7 +6,7 @@ This Project is under development!
 
 Home Page
 
-<img src  = "![ProductsHome!](screenshots/home.png)" width = "200" height = "600" >
+<img src  = "![ProductsHome!](screenshots/home.png)" width = "400" height = "600" >
 
 Detail Page
 
