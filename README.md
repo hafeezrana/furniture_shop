@@ -1,16 +1,25 @@
 # furniture_shop
 
-A new Flutter project.
+This Project is under development!
 
-## Getting Started
+>Furniture Shop App , firebase , flutter_riverpod
 
-This project is a starting point for a Flutter application.
+Home Page
 
-A few resources to get you started if this is your first Flutter project:
+![ProductsHome!](screenshots/home.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Detail Page
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![ProductsDetail!](screenshots/product_detail.png)
+
+Profile Page
+
+![UserProfile!](screenshots/profile.png)
+
+
+## CopyRights:
+This is for learning purpose only. All copyrights reserved to the project author.
+
+
+
+
