@@ -6,7 +6,7 @@ This Project is under development!
 
 Home Page
 
-![ProductsHome!](screenshots/home.png) width = "500" height = "700" 
+![ProductsHome!](screenshots/home.png) 
 
 Detail Page
 
