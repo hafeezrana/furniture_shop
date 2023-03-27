@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../utils/widgets/text_style.dart';
+import '../model/address.dart';
+import 'geo_map_screen.dart';
 
 class AddAdressScreen extends StatefulWidget {
-  const AddAdressScreen({super.key});
+  AddAdressScreen({this.address, super.key});
 
   static const route = '/addAddressScreen';
+  Address? address;
 
   @override
   State<AddAdressScreen> createState() => _AddAdressScreenState();
 }
 
 class _AddAdressScreenState extends State<AddAdressScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +47,16 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
               const SizedBox(height: 10),
               AddressContainer('Full Name', 'Rizwan Javed'),
               AddressContainer('Address', 'Ex: 25 Brownie street'),
-              AddressContainer('Zip Code (Postal Code)', '0203 38283'),
+              AddressContainer('Zip Code (Postal Code)', '222'),
               AddressContainer('Country', 'Pakistan'),
               AddressContainer('City', 'Lahore'),
+              const SizedBox(height: 20),
+              ResuableButton(
+                buttonText: 'Choose from Map',
+                onTap: () {
+                  context.push(MapScreen.route);
+                },
+              )
             ],
           ),
         ),
