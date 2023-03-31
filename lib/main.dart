@@ -2,12 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:furniture_shop/bottom_navbar.dart';
 import 'package:furniture_shop/routes.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 import 'authentication/auth_service.dart';
 import 'authentication/signin/signIn_screen.dart';
+import 'bottom_navbar.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -30,14 +29,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OverlaySupport(
-      child: MaterialApp.router(
-        routerConfig: MyRouter().router,
-        debugShowCheckedModeBanner: false,
-        title: 'Furniture Shop',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+    return MaterialApp.router(
+      routerConfig: MyRouter().router,
+      debugShowCheckedModeBanner: false,
+      title: 'Furniture Shop',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
     );
   }
@@ -56,6 +53,7 @@ class AuthStateChanges extends StatelessWidget {
       builder: (conext, snapshot) {
         if (snapshot.data != null) {
           return const BottomNavBarScreen();
+          // return AddAdressScreen();
         } else {
           return const SignInScreen();
         }

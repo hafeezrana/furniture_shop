@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
-import 'package:go_router/go_router.dart';
+import 'package:map_location_picker/map_location_picker.dart';
 
 import '../../../utils/widgets/text_style.dart';
 import '../model/address.dart';
-import 'geo_map_screen.dart';
+import '../utils/constants/map_key.dart';
+import '../utils/widgets/reusable_card.dart';
 
 class AddAdressScreen extends StatefulWidget {
   AddAdressScreen({this.address, super.key});
@@ -23,83 +23,150 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
     super.initState();
   }
 
+  final formKey = GlobalKey<FormState>();
+  final addressController = TextEditingController();
+  final nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: ListView(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back_ios)),
-                  const Text('Add Shipping Address',
-                      style: MyTextStyle.textStyle3b),
-                  const SizedBox(width: 10)
-                ],
-              ),
-              const SizedBox(height: 10),
-              AddressContainer('Full Name', 'Rizwan Javed'),
-              AddressContainer('Address', 'Ex: 25 Brownie street'),
-              AddressContainer('Zip Code (Postal Code)', '222'),
-              AddressContainer('Country', 'Pakistan'),
-              AddressContainer('City', 'Lahore'),
-              const SizedBox(height: 20),
-              ResuableButton(
-                buttonText: 'Choose from Map',
-                onTap: () {
-                  context.push(MapScreen.route);
-                },
-              )
-            ],
+          child: Form(
+            key: formKey,
+            child: ListView(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(Icons.arrow_back_ios)),
+                    const Text('Add Shipping Address',
+                        style: MyTextStyle.textStyle3b),
+                    const SizedBox(width: 10)
+                  ],
+                ),
+                const SizedBox(height: 10),
+                ReusableCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Text('Name', style: MyTextStyle.textStyle2b),
+                        ],
+                      ),
+                      const Divider(),
+                      TextFormField(
+                        maxLines: 1,
+                        controller: nameController,
+                        validator: (value) {
+                          return value!.isEmpty ? 'Enter Name' : null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Ex. Hafeez Rana',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ReusableCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Address', style: MyTextStyle.textStyle2b),
+                          IconButton(
+                              onPressed: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return MapLocationPicker(
+                                        apiKey: gMapKey,
+                                        components: [
+                                          Component(Component.country, 'PK')
+                                        ],
+                                        canPopOnNextButtonTaped: true,
+                                        currentLatLng:
+                                            const LatLng(30.157458, 71.5249154),
+                                        onNext: (GeocodingResult? result) {
+                                          if (result != null) {
+                                            setState(() {
+                                              addressController.text =
+                                                  result.formattedAddress ?? "";
+                                            });
+                                          }
+                                        },
+                                        onSuggestionSelected:
+                                            (PlacesDetailsResponse? result) {
+                                          if (result != null) {
+                                            setState(() {});
+                                          }
+                                        },
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.location_on_sharp,
+                                color: Colors.green,
+                                size: 35,
+                              ))
+                        ],
+                      ),
+                      const Divider(),
+                      TextFormField(
+                        maxLines: 2,
+                        controller: addressController,
+                        validator: (value) {
+                          return value!.isEmpty ? 'Enter Address' : null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Ex. Gulberg III , Liberty Chowk , Lahore',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: ResuableButton(
           buttonText: 'SAVE ADDRESS',
           onTap: () {
-            Navigator.pop(context);
-            Navigator.pop(context);
+            if (formKey.currentState!.validate()) {
+              formKey.currentState!.save();
+              if (nameController.text.isNotEmpty &&
+                  addressController.text.isNotEmpty) {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }
+            }
           },
         ),
       ),
-    );
-  }
-
-  AddressContainer(String title, String subtitle) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6), color: ConstColors.white2),
-        height: 80,
-        child: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title),
-              TextField(
-                textAlign: TextAlign.start,
-                style: MyTextStyle.textStyle2b,
-                decoration: InputDecoration(
-                    hintText: subtitle,
-                    hintStyle: MyTextStyle.textStyle1b,
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none),
-              ),
-            ],
-          ),
-        ),
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

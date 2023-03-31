@@ -8,7 +8,6 @@ import 'package:furniture_shop/reviews/reviews_rating_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'address/add_address_scrn.dart';
-import 'address/geo_map_screen.dart';
 import 'address/shipping_addresses.dart';
 import 'authentication/signin/signIn_screen.dart';
 import 'authentication/signup/signUp_screen.dart';
@@ -111,11 +110,6 @@ class MyRouter {
             final address = state.extra as Address;
 
             return AddAdressScreen(address: address);
-          }),
-      GoRoute(
-          path: MapScreen.route,
-          builder: (context, state) {
-            return const MapScreen();
           }),
       GoRoute(
         path: SettingScreen.route,
