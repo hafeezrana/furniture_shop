@@ -1,1 +1,1 @@
-const gMapKey = 'AIzaSyB3-PXBvW4UuH10ZRBY7kd20EFcxDZksQU';
+const gMapKey = 'Place Your GOOGLE MAP KEY HERE';
