@@ -53,7 +53,6 @@ class AuthStateChanges extends StatelessWidget {
       builder: (conext, snapshot) {
         if (snapshot.data != null) {
           return const BottomNavBarScreen();
-          // return AddAdressScreen();
         } else {
           return const SignInScreen();
         }

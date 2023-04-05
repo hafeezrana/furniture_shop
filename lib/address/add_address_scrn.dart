@@ -150,21 +150,18 @@ class _AddAdressScreenState extends State<AddAdressScreen> {
           ),
         ),
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ResuableButton(
-          buttonText: 'SAVE ADDRESS',
-          onTap: () {
-            if (formKey.currentState!.validate()) {
-              formKey.currentState!.save();
-              if (nameController.text.isNotEmpty &&
-                  addressController.text.isNotEmpty) {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              }
+      floatingActionButton: ResuableButton(
+        buttonText: 'SAVE ADDRESS',
+        onTap: () {
+          if (formKey.currentState!.validate()) {
+            formKey.currentState!.save();
+            if (nameController.text.isNotEmpty &&
+                addressController.text.isNotEmpty) {
+              Navigator.pop(context);
+              Navigator.pop(context);
             }
-          },
-        ),
+          }
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

@@ -102,10 +102,12 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
                                     .copyWith(fontWeight: FontWeight.w700),
                                 maxLines: 2),
                           ),
-                          const Text(
-                              'Lorem Lipsum product color is mostly used by women with better usagea and results',
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis),
+                          const Flexible(
+                            child: Text(
+                                'Lorem Lipsum product color is mostly used by women with better usagea and results',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis),
+                          ),
                         ],
                       ),
                     ),

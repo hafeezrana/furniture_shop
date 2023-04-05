@@ -66,16 +66,14 @@ class _AddPaymentMethodScrnState extends State<AddPaymentMethodScrn> {
           ),
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: ResuableButton(
-          buttonText: 'ADD NEW CARD',
-          onTap: () {
-            Navigator.pop(context);
-            Navigator.pop(context);
-          },
-        ),
+      floatingActionButton: ResuableButton(
+        buttonText: 'ADD NEW CARD',
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

@@ -163,15 +163,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           ),
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: ResuableButton(
-          buttonText: 'SUBMIT ORDER',
-          onTap: () {
-            context.push(OrderNoteScreen.route);
-          },
-        ),
+      floatingActionButton: ResuableButton(
+        buttonText: 'SUBMIT ORDER',
+        onTap: () {
+          context.push(OrderNoteScreen.route);
+        },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

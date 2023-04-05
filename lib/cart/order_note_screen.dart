@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:furniture_shop/bottom_navbar.dart';
 import 'package:furniture_shop/utils/constants/colors_consts.dart';
 import 'package:furniture_shop/utils/constants/images_consts.dart';
 import 'package:furniture_shop/utils/widgets/resusable_button.dart';
 import 'package:furniture_shop/utils/widgets/text_style.dart';
 import 'package:go_router/go_router.dart';
 
+import '../bottom_navbar.dart';
 import '../myorders/order_screen.dart';
 
 class OrderNoteScreen extends StatefulWidget {
@@ -48,26 +48,20 @@ class _OrderNoteScreenState extends State<OrderNoteScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: ConstColors.black2),
-                    ),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width / 1.5,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        elevation: 6,
+                  InkWell(
+                    onTap: () {
+                      context.push(
+                        BottomNavBarScreen.route,
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border:
+                            Border.all(color: ConstColors.black, width: 1.5),
                       ),
-                      onPressed: () {
-                        context.push(
-                          BottomNavBarScreen.route,
-                        );
-                      },
+                      height: 50,
+                      width: MediaQuery.of(context).size.width / 1.5,
                       child: Text(
                         'Back to Home',
                         style: MyTextStyle.textStyle3

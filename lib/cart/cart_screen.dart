@@ -301,15 +301,13 @@ class CartScreen extends ConsumerWidget {
           ),
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: ResuableButton(
-          buttonText: 'Check Out',
-          onTap: () {
-            context.push(CheckOutScreen.route);
-          },
-        ),
+      floatingActionButton: ResuableButton(
+        buttonText: 'Check Out',
+        onTap: () {
+          context.push(CheckOutScreen.route);
+        },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

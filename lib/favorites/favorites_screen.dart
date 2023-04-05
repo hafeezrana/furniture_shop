@@ -165,15 +165,13 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
           ),
         ),
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: ResuableButton(
-          buttonText: 'Add all To My Cart',
-          onTap: () {
-            context.push(CartScreen.route);
-          },
-        ),
+      floatingActionButton: ResuableButton(
+        buttonText: 'Add all To My Cart',
+        onTap: () {
+          context.push(CartScreen.route);
+        },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
